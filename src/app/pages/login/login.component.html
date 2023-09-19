@@ -1,0 +1,63 @@
+<div class="container mx-auto w-[1080px]">
+  <h1 class="text-center">Login</h1>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+    novalidate
+  >
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Enter your email"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'email')"> Email is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'email')"> Email must be at least 6 characters long </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'email')"> Email must not exceed 30 characters</mat-error>
+      <mat-error *ngIf="myForm.hasError('email', 'email')"> Invalid email format </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        placeholder="Enter your password"
+        [type]="hideOne ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hideOne = !hideOne"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideOne"
+      >
+        <mat-icon>{{ hideOne ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="myForm.hasError('required', 'password')"> Password is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'password')">
+        Password must be at least 6 characters long
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'password')"> Password must not exceed 30 characters </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!myForm.valid"
+    >
+      Login
+    </button>
+  </form>
+</div>

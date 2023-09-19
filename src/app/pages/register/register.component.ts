@@ -1,9 +1,8 @@
+import { AuthService } from '@core/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { User } from '@core/interfaces/user';
-import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-register',

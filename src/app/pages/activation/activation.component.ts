@@ -1,8 +1,10 @@
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@core/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '@core/interfaces/user';
-import { AuthService } from '@core/services/auth.service';
+
 @Component({
   selector: 'app-activation',
   templateUrl: './activation.component.html',
@@ -17,6 +19,7 @@ export class ActivationComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private _snackBar: MatSnackBar,
+    private routerNavigate: Router,
   ) {}
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class ActivationComponent implements OnInit {
               verticalPosition: this.verticalPosition,
             });
             this.success = data.message;
+            this.routerNavigate.navigate(['/login']);
           },
           (err) => {
             this._snackBar.open(`${err.error.message}`, 'OK', {

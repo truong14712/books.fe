@@ -146,6 +146,8 @@
       <mat-error *ngIf="myForm.hasError('maxlength', 'phoneNumber')">
         phoneNumber must not exceed 10 characters
       </mat-error>
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint>Include area code</mat-hint>
     </mat-form-field>
 
     <label
