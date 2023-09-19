@@ -1,0 +1,49 @@
+<div class="example-container">
+  <h1 class="text-center">Add Category</h1>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+  >
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>CategoryName</mat-label>
+      <input
+        matInput
+        placeholder="Name Category"
+        required
+        formControlName="nameCategory"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'nameCategory')">
+        NameCategory is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'nameCategory')">
+        NameCategory must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+      class="form-field"
+      appearance="fill"
+    >
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="myForm.hasError('required', 'description')">
+        Description is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!myForm.valid"
+    >
+      Add Category
+    </button>
+  </form>
+</div>
