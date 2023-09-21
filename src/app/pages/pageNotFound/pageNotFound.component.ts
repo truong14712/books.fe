@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -7,12 +6,4 @@ import { Router } from '@angular/router';
   templateUrl: './pageNotFound.component.html',
   styleUrls: ['./pageNotFound.component.css'],
 })
-export class PageNotFoundComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit() {}
-
-  goBack() {
-    this.router.navigate(['/']);
-  }
-}
+export class PageNotFoundComponent {}

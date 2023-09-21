@@ -1,0 +1,238 @@
+<div class="container mx-auto w-[1080px]">
+  <h1 class="text-center">Add Book</h1>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+    novalidate
+  >
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Name Book</mat-label>
+      <input
+        matInput
+        formControlName="nameBook"
+        type="text"
+        placeholder="Enter your Name Book"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'nameBook')"> nameBook is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'nameBook')">
+        nameBook must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Auth</mat-label>
+      <input
+        matInput
+        formControlName="auth"
+        type="text"
+        placeholder="Enter your auth"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'auth')"> auth is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'auth')"> auth must be at least 6 characters long </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        type="text"
+        placeholder="Enter your price"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'price')"> price is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'price')"> price must be at least 6 characters long </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        formControlName="description"
+        type="text"
+        placeholder="Enter your description"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'description')">
+        description is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'description')">
+        description must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Page Number</mat-label>
+      <input
+        matInput
+        formControlName="pageNumber"
+        type="text"
+        placeholder="Enter your pageNumber"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'pageNumber')"> pageNumber is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'pageNumber')">
+        pageNumber must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Publisher</mat-label>
+      <input
+        matInput
+        formControlName="publisher"
+        type="text"
+        placeholder="Enter your publisher"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'publisher')"> publisher is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'publisher')">
+        publisher must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Publication Year</mat-label>
+      <input
+        matInput
+        formControlName="publicationYear"
+        type="text"
+        placeholder="Enter your publicationYear"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'publicationYear')">
+        publicationYear is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'publicationYear')">
+        publicationYear must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Translator</mat-label>
+      <input
+        matInput
+        formControlName="translator"
+        type="text"
+        placeholder="Enter your translator"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'translator')"> Translator is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'translator')">
+        Translator must be at least 6 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Weight</mat-label>
+      <input
+        matInput
+        formControlName="weight"
+        type="text"
+        placeholder="Enter your weight"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'weight')"> weight is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'weight')"> weight must be at least 6 characters long </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Size</mat-label>
+      <input
+        matInput
+        formControlName="size"
+        type="text"
+        placeholder="Enter your size"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'size')"> size is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'size')"> size must be at least 6 characters long </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>language</mat-label>
+      <mat-select (selectionChange)="onLanguageSelection($event.value)">
+        <mat-option
+          *ngFor="let language of listLanguage"
+          [value]="language.name"
+        >
+          {{ language.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="onCategorySelection($event.value)">
+        <mat-option
+          *ngFor="let category of listCategory"
+          [value]="category._id"
+        >
+          {{ category.nameCategory }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-label>Cover Type</mat-label>
+    <mat-radio-group
+      aria-label="Select an option"
+      (change)="onSelectionChange($event.value)"
+    >
+      <mat-radio-button value="false">Paper Back</mat-radio-button>
+      <mat-radio-button value="true">Hard Cover</mat-radio-button>
+    </mat-radio-group>
+
+    <label
+      class="w-[200px] flex items-center px-4 py-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer my-5 hover:bg-blue-500 hover:text-white"
+    >
+      <svg
+        class="w-8 h-8 mr-3"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+        />
+      </svg>
+      <span class="mt-2 text-base leading-normal">Images</span>
+      <input
+        type="file"
+        class="hidden file-upload"
+        (change)="onFileSelected($event)"
+        multiple="true"
+      />
+    </label>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!myForm.valid"
+    >
+      Add Book
+    </button>
+  </form>
+</div>

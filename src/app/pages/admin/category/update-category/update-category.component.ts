@@ -48,7 +48,6 @@ export class UpdateCategoryComponent {
     if (this.myForm.valid) {
       this.category.addCategory(category).subscribe(
         (data: { message: string; data: Category; isSuccess: boolean; status: boolean }) => {
-          console.log(data);
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
@@ -56,7 +55,6 @@ export class UpdateCategoryComponent {
           this.router.navigate(['admin/category']);
         },
         ({ error }) => {
-          console.log(error);
           this._snackBar.open(`${error.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,

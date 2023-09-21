@@ -1,24 +1,32 @@
-<div class="bg-gradient-to-r from-purple-300 to-blue-200">
-  <div class="flex items-center justify-center w-9/12 min-h-screen py-16 m-auto">
-    <div class="pb-8 overflow-hidden bg-white shadow sm:rounded-lg">
-      <div class="pt-8 text-center border-t border-gray-200">
-        <h1 class="font-bold text-purple-400 text-9xl">404</h1>
-        <h1 class="py-8 text-6xl font-medium">oops! Page not found</h1>
-        <p class="px-12 pb-8 text-2xl font-medium">
-          Oops! The page you are looking for does not exist. It might have been moved or deleted.
-        </p>
-        <button
-          class="px-6 py-3 mr-6 font-semibold text-white rounded-md bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500"
-          (click)="goBack()"
-        >
-          HOME
-        </button>
-        <button
-          class="px-6 py-3 font-semibold text-white rounded-md bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-500"
-        >
-          Contact Us
-        </button>
-      </div>
-    </div>
+<div
+  class="flex flex-col items-center justify-center gap-16 px-6 lg:flex-row py-28 md:px-24 md:py-20 lg:py-32 lg:gap-28"
+>
+  <div class="w-full lg:w-1/2">
+    <img
+      class="hidden lg:block"
+      src="https://i.ibb.co/v30JLYr/Group-192-2.png"
+    />
+    <img
+      class="hidden md:block lg:hidden"
+      src="https://i.ibb.co/c1ggfn2/Group-193.png"
+    />
+    <img
+      class="md:hidden"
+      src="https://i.ibb.co/8gTVH2Y/Group-198.png"
+    />
+  </div>
+  <div class="w-full lg:w-1/2">
+    <h1 class="py-4 text-3xl font-extrabold text-gray-800 lg:text-4xl">
+      Looks like you've found the doorway to the great nothing
+    </h1>
+    <p class="py-4 text-base text-gray-800">
+      The content you’re looking for doesn’t exist. Either it was removed, or you mistyped the link.
+    </p>
+    <p class="py-2 text-base text-gray-800">Sorry about that! Please visit our hompage to get where you need to go.</p>
+    <button
+      class="w-full px-1 py-5 my-4 text-white bg-indigo-600 border rounded-md lg:w-auto sm:px-16 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+    >
+      <a [routerLink]="['/']"> Go back to Homepage </a>
+    </button>
   </div>
 </div>

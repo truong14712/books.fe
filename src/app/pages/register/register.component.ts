@@ -9,7 +9,7 @@ import { User } from '@core/interfaces/user';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   avatar!: File;
   user!: any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit {
       validator: this.checkPassword,
     },
   );
-  ngOnInit() {}
 
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -56,6 +55,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const formValue: User = this.myForm?.value as User;
     const formData = new FormData();
+
     formData.append('firstName', formValue.firstName);
     formData.append('lastName', formValue.lastName);
     formData.append('email', formValue.email);
@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
     formData.append('confirmPassword', formValue.confirmPassword);
     formData.append('phoneNumber', formValue.phoneNumber.toString());
     formData.append('image', this.avatar);
+
     this.user = formData;
     if (this.myForm.valid) {
       this.auth.Register(this.user).subscribe(
@@ -72,6 +73,7 @@ export class RegisterComponent implements OnInit {
             verticalPosition: this.verticalPosition,
           });
         },
+
         (err) => {
           console.log(err);
         },

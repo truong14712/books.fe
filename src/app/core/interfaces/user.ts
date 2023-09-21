@@ -11,3 +11,13 @@ export interface User {
     public_id: string;
   };
 }
+export interface changePassword {
+  password: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+export interface changeInformation {
+  firstName: string;
+  lastName: string;
+  phoneNumber: number | string;
+}

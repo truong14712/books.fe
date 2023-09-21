@@ -9,7 +9,7 @@ import { User } from '@core/interfaces/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   user!: any;
   hideOne = true;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
   });
-  ngOnInit() {}
 
   onSubmit() {
     if (this.myForm.valid) {
