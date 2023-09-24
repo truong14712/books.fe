@@ -1,0 +1,44 @@
+<!-- Main navigation container -->
+<nav
+  class="relative flex w-full flex-nowrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 lg:flex-wrap lg:justify-start lg:py-4 mb-4"
+  data-te-navbar-ref
+>
+  <div class="flex flex-wrap items-center justify-between w-full px-3">
+    <div
+      class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+      id="navbarSupportedContent3"
+      data-te-collapse-item
+    >
+      <!-- Left links -->
+      <div
+        class="flex flex-col pl-0 mr-auto list-style-none lg:mt-1 lg:flex-row"
+        data-te-navbar-nav-ref
+      >
+        <!-- Features link -->
+        <div
+          class="pl-2 mb-4 lg:mb-0 lg:pl-0 lg:pr-1"
+          data-te-nav-item-ref
+        >
+          <a
+            class="p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+            routerLink="/admin/book"
+            data-te-nav-link-ref
+            >Book</a
+          >
+        </div>
+        <!-- Pricing link -->
+        <div
+          class="pl-2 mb-4 lg:mb-0 lg:pl-0 lg:pr-1"
+          data-te-nav-item-ref
+        >
+          <a
+            class="p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 motion-reduce:transition-none lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+            routerLink="/admin/category"
+            data-te-nav-link-ref
+            >Category</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
