@@ -1,5 +1,5 @@
 import { AuthService } from '@core/services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -44,12 +44,11 @@ export class LoginComponent {
             verticalPosition: this.verticalPosition,
           });
           const { user, accessToken } = data.data;
-          localStorage.setItem('user', JSON.stringify(user));
-          localStorage.setItem('accessToken', JSON.stringify(accessToken));
+          this.auth.setUser(user);
+          this.auth.setToken(accessToken);
           this.router.navigate(['/']);
         },
         (err) => {
-          console.log();
           this._snackBar.open(`${err.error.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
