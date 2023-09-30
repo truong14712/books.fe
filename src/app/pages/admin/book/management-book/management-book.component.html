@@ -3,7 +3,7 @@
     <button
       mat-raised-button
       color="primary"
-      class="text-left"
+      class="mx-4 text-left"
     >
       <a [routerLink]="['/admin/book/add']"> Add Book </a>
     </button>
@@ -76,6 +76,23 @@
             {{ element.price }}
           </td>
         </ng-container>
+
+        <ng-container matColumnDef="discountPrice">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+          >
+            Discount Price
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+          >
+            {{ element.discountPrice }}
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="actions">
           <th
             mat-header-cell
@@ -88,13 +105,17 @@
             *matCellDef="let element"
           >
             <button
-              class="p-3 mx-1 bg-blue-200 rounded-lg"
+              mat-raised-button
+              color="primary"
+              class="p-3 mx-1"
               (click)="updateBook(element._id)"
             >
               Edit
             </button>
             <button
-              class="p-3 mx-1 bg-blue-200 rounded-lg"
+              mat-raised-button
+              color="warn"
+              class="p-3 mx-1"
               (click)="deleteBook(element._id)"
             >
               Remove
@@ -125,8 +146,8 @@
     </table>
     <mat-paginator
       class="mt-4"
-      [pageSize]="5"
-      [pageSizeOptions]="[5, 10, 15]"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 15, 20]"
       showFirstLastButtons
     >
     </mat-paginator>

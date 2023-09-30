@@ -5,8 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user-footer.component.html',
   styleUrls: ['./user-footer.component.css'],
 })
-export class UserFooterComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class UserFooterComponent {}

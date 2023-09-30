@@ -1,0 +1,72 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <tr>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Địa chỉ 1
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Địa chỉ 2
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Kiểu địa chỉ
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Thành phố
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Đất nước
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Mã bưu chính
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Hành động
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white"
+        *ngFor="let item of user.addresses"
+      >
+        <td class="px-6 py-4">{{ item.address1 }}</td>
+        <td class="px-6 py-4">{{ item.address2 }}</td>
+        <td class="px-6 py-4">{{ item.addressType }}</td>
+        <td class="px-6 py-4">{{ item.city }}</td>
+        <td class="px-6 py-4">{{ item.country }}</td>
+        <td class="px-6 py-4">{{ item.zipCode }}</td>
+        <td class="px-6 py-4">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="removeAddress(item._id)"
+          >
+            Xóa
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

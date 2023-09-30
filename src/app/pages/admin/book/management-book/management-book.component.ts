@@ -14,7 +14,7 @@ import { BookService } from '@core/services/book/book.service';
 })
 export class ManagementBookComponent implements OnInit {
   listBook: Book[] = [];
-  displayedColumns: string[] = ['_id', 'nameBook', 'auth', 'price', 'actions'];
+  displayedColumns: string[] = ['_id', 'nameBook', 'auth', 'price', 'discountPrice', 'actions'];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   dataSource!: MatTableDataSource<Book>;
@@ -27,18 +27,13 @@ export class ManagementBookComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.book.getAllBook().subscribe(
-      (data) => {
-        const { docs } = data.data;
-        this.listBook = docs;
-        this.dataSource = new MatTableDataSource<Book>(this.listBook);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      (error) => {
-        console.error(error);
-      },
-    );
+    this.book.getAllBook().subscribe((data) => {
+      const { docs } = data.data;
+      this.listBook = docs;
+      this.dataSource = new MatTableDataSource<Book>(this.listBook);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   deleteBook(id: string) {
@@ -50,9 +45,6 @@ export class ManagementBookComponent implements OnInit {
             verticalPosition: this.verticalPosition,
           });
           this.ngOnInit();
-        },
-        (error) => {
-          console.error(error);
         },
       );
     }

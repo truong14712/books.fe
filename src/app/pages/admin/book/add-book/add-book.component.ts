@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { language } from '@core/utils/language';
-
+import { language } from '@core/constants/language';
+import { coverType } from '@core/constants/coverType';
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -18,22 +18,26 @@ export class AddBookComponent implements OnInit {
   listCategory: Category[] = [];
   categoryId = '';
   newBook!: any;
-  coverType!: boolean;
+  coverType = '';
   listLanguage = language;
-  language!: any;
+  listCoverType = coverType;
+  language = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   myForm = this.FormBuilder.group({
     nameBook: ['', [Validators.required, Validators.minLength(6)]],
     auth: ['', [Validators.required, Validators.minLength(6)]],
     price: [0, [Validators.required]],
+    discountPrice: [0, [Validators.required]],
     description: ['', [Validators.required]],
     pageNumber: [0, [Validators.required]],
-    publisher: [0, [Validators.required, Validators.minLength(6)]],
-    publicationYear: ['', [Validators.required]],
+    publisher: ['', [Validators.required, Validators.minLength(6)]],
+    publicationYear: [0, [Validators.required]],
     translator: ['', [Validators.required]],
     size: ['', [Validators.required]],
     weight: [0, [Validators.required]],
+    brand: ['', Validators.required],
+    stock: [0, [Validators.required]],
   });
   constructor(
     private FormBuilder: FormBuilder,
@@ -67,10 +71,9 @@ export class AddBookComponent implements OnInit {
     this.categoryId = categoryId;
   }
   onLanguageSelection(language: string) {
-    console.log(language);
     this.language = language;
   }
-  onSelectionChange(coverType: boolean) {
+  onSelectionChange(coverType: string) {
     this.coverType = coverType;
   }
   onSubmit() {
@@ -82,17 +85,20 @@ export class AddBookComponent implements OnInit {
       formData.append('language', this.language);
       formData.append('pageNumber', formValue.pageNumber);
       formData.append('price', formValue.price);
+      formData.append('discountPrice', formValue.discountPrice);
       formData.append('publicationYear', formValue.publicationYear);
       formData.append('publisher', formValue.publisher);
       formData.append('size', formValue.size);
       formData.append('translator', formValue.translator);
       formData.append('nameBook', formValue.nameBook);
       formData.append('weight', formValue.weight);
+      formData.append('stock', formValue.stock);
+      formData.append('brand', formValue.brand);
       formData.append('categoryId', this.categoryId);
       this.images.forEach((file: File) => {
         formData.append('images', file);
       });
-      formData.append('coverType', this.coverType.toString());
+      formData.append('coverType', this.coverType);
       this.newBook = formData;
       this.book.addBook(this.newBook).subscribe(
         (data: { isSuccess: boolean; status: number; message: string; data: Book }) => {

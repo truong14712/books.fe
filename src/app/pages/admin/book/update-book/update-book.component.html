@@ -57,13 +57,27 @@
       appearance="fill"
       class="form-field"
     >
-      <mat-label>Description</mat-label>
+      <mat-label>Discount Price</mat-label>
       <input
         matInput
-        formControlName="description"
+        formControlName="discountPrice"
         type="text"
-        placeholder="Enter your description"
+        placeholder="Enter your discountPrice"
       />
+      <mat-error *ngIf="myForm.hasError('required', 'discountPrice')">
+        discountPrice is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+      ></textarea>
       <mat-error *ngIf="myForm.hasError('required', 'description')">
         description is <strong>required</strong>
       </mat-error>
@@ -84,9 +98,6 @@
         placeholder="Enter your pageNumber"
       />
       <mat-error *ngIf="myForm.hasError('required', 'pageNumber')"> pageNumber is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'pageNumber')">
-        pageNumber must be at least 6 characters long
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -120,9 +131,6 @@
       <mat-error *ngIf="myForm.hasError('required', 'publicationYear')">
         publicationYear is <strong>required</strong>
       </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'publicationYear')">
-        publicationYear must be at least 6 characters long
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -154,7 +162,35 @@
         placeholder="Enter your weight"
       />
       <mat-error *ngIf="myForm.hasError('required', 'weight')"> weight is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'weight')"> weight must be at least 6 characters long </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Brand</mat-label>
+      <input
+        matInput
+        formControlName="brand"
+        type="text"
+        placeholder="Enter your brand"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'brand')"> stock is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'brand')"> brand must be at least 6 characters long </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>stock</mat-label>
+      <input
+        matInput
+        formControlName="stock"
+        type="text"
+        placeholder="Enter your stock"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'stock')"> stock is <strong>required</strong> </mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -169,12 +205,14 @@
         placeholder="Enter your size"
       />
       <mat-error *ngIf="myForm.hasError('required', 'size')"> size is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'size')"> size must be at least 6 characters long </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-field">
       <mat-label>language</mat-label>
-      <mat-select (selectionChange)="onLanguageSelection($event.value)">
+      <mat-select
+        [(value)]="selectedLanguage"
+        (selectionChange)="onLanguageSelection($event.value)"
+      >
         <mat-option
           *ngFor="let language of listLanguage"
           [value]="language.name"
@@ -186,7 +224,10 @@
 
     <mat-form-field class="form-field">
       <mat-label>Category</mat-label>
-      <mat-select (selectionChange)="onCategorySelection($event.value)">
+      <mat-select
+        [(value)]="selectedCategoryId"
+        (selectionChange)="onCategorySelection($event.value)"
+      >
         <mat-option
           *ngFor="let category of listCategory"
           [value]="category._id"
@@ -195,15 +236,24 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-label>Cover Type</mat-label>
-    <mat-radio-group
-      aria-label="Select an option"
-      (change)="onSelectionChange($event.value)"
-    >
-      <mat-radio-button value="false">Paper Back</mat-radio-button>
-      <mat-radio-button value="true">Hard Cover</mat-radio-button>
-    </mat-radio-group>
-
+    <mat-form-field class="form-field">
+      <mat-label>CoverType</mat-label>
+      <mat-select
+        [(value)]="selectedCoverType"
+        (selectionChange)="onSelectionChange($event.value)"
+      >
+        <mat-option
+          *ngFor="let CoverType of listCoverType"
+          [value]="CoverType.name"
+        >
+          {{ CoverType.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <img
+      [src]="imageUrl"
+      alt="Ảnh hiện có"
+    />
     <label
       class="w-[200px] flex items-center px-4 py-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer my-5 hover:bg-blue-500 hover:text-white"
     >

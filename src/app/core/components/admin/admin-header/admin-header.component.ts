@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth/auth.service';
 import { ModelProfileAdminComponent } from '../model-profile-admin/model-profile-admin.component';
-import { Router } from '@angular/router';
 import { BookService } from '@core/services/book/book.service';
 
 @Component({
