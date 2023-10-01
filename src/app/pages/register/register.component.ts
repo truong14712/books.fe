@@ -23,12 +23,12 @@ export class RegisterComponent {
   ) {}
   myForm = this.formBuilder.group(
     {
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.maxLength(30)]],
+      lastName: ['', [Validators.required, Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
     },
     {
       validator: this.checkPassword,

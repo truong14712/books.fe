@@ -15,7 +15,7 @@ import { coverType } from '@core/constants/coverType';
   styleUrls: ['./update-book.component.css'],
 })
 export class UpdateBookComponent implements OnInit {
-  images!: any;
+  images!: File[];
   listCategory: Category[] = [];
   categoryId = '';
   newBook!: any;
@@ -25,7 +25,7 @@ export class UpdateBookComponent implements OnInit {
   listLanguage = language;
   listCoverType = coverType;
   coverType = '';
-  selectedCategoryId!: string;
+  selectedCategoryId!: { _id: string };
   selectedCoverType!: string;
   selectedLanguage!: string;
   imageUrl!: [];
@@ -105,7 +105,6 @@ export class UpdateBookComponent implements OnInit {
     this.coverType = coverType;
   }
   onLanguageSelection(language: string) {
-    console.log(language);
     this.language = language;
   }
   onSubmit() {
@@ -130,7 +129,7 @@ export class UpdateBookComponent implements OnInit {
         if (this.categoryId) {
           formData.append('categoryId', this.categoryId);
         } else {
-          formData.append('categoryId', this.selectedCategoryId);
+          formData.append('categoryId', this.selectedCategoryId._id);
         }
         if (this.coverType) {
           formData.append('coverType', this.coverType);

@@ -1,5 +1,5 @@
 <div class="example-container">
-  <h1 class="text-center">Update Category</h1>
+  <h1 class="text-center">Cập Nhật Thể Loại</h1>
   <form
     [formGroup]="myForm"
     (ngSubmit)="onSubmit()"
@@ -9,7 +9,7 @@
       appearance="fill"
       class="form-field"
     >
-      <mat-label>CategoryName</mat-label>
+      <mat-label>Tên Thể Loại</mat-label>
       <input
         matInput
         placeholder="Name Category"
@@ -17,23 +17,21 @@
         formControlName="nameCategory"
       />
       <mat-error *ngIf="myForm.hasError('required', 'nameCategory')">
-        NameCategory is <strong>required</strong>
+        Tên Thể Loại is <strong>Không Được Để Trống</strong>
       </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'nameCategory')">
-        NameCategory must be at least 6 characters long
-      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'nameCategory')"> Tên Thể Loại Phải 6 Ký Tự Trở Lên </mat-error>
     </mat-form-field>
     <mat-form-field
       class="form-field"
       appearance="fill"
     >
-      <mat-label>Description</mat-label>
+      <mat-label>Mô Tả</mat-label>
       <textarea
         matInput
         formControlName="description"
       ></textarea>
       <mat-error *ngIf="myForm.hasError('required', 'description')">
-        Description is <strong>required</strong>
+        Mô Tả<strong>Không Được Để Trống</strong>
       </mat-error>
     </mat-form-field>
     <button
@@ -43,7 +41,7 @@
       class="submit-button"
       [disabled]="!myForm.valid"
     >
-      Update Category
+      Cập Nhật Thể Loại Ngay
     </button>
   </form>
 </div>

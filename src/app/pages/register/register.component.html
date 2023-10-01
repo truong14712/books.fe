@@ -1,5 +1,5 @@
 <div class="container mx-auto w-[1080px]">
-  <h1 class="text-center">Register</h1>
+  <div class="mt-[2rem] text-center text-[2rem]">Đăng Ký</div>
   <form
     [formGroup]="myForm"
     (ngSubmit)="onSubmit()"
@@ -10,36 +10,30 @@
       appearance="fill"
       class="form-field"
     >
-      <mat-label>firstName</mat-label>
+      <mat-label>Họ</mat-label>
       <input
         matInput
         formControlName="firstName"
         type="firstName"
         placeholder="Enter your firstName"
       />
-      <mat-error *ngIf="myForm.hasError('required', 'firstName')"> firstName is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'firstName')">
-        firstName must be at least 6 characters long
-      </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'firstName')"> firstName must not exceed 30 characters </mat-error>
+      <mat-error *ngIf="myForm.hasError('required', 'firstName')"> Họ <strong>Không Được Để Trống</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'firstName')"> Họ Phải 30 Ký Tự Trở Xuống </mat-error>
     </mat-form-field>
 
     <mat-form-field
       appearance="fill"
       class="form-field"
     >
-      <mat-label>lastName</mat-label>
+      <mat-label>Tên</mat-label>
       <input
         matInput
         formControlName="lastName"
         type="lastName"
         placeholder="Enter your lastName"
       />
-      <mat-error *ngIf="myForm.hasError('required', 'lastName')"> lastName is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'lastName')">
-        lastName must be at least 6 characters long
-      </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'lastName')"> lastName must not exceed 30 characters </mat-error>
+      <mat-error *ngIf="myForm.hasError('required', 'lastName')"> Tên <strong>Không Được Để Trống</strong></mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'lastName')"> Tên Phải 30 Ký Tự Trở Xuống</mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -52,17 +46,17 @@
         formControlName="email"
         placeholder="Enter your email"
       />
-      <mat-error *ngIf="myForm.hasError('required', 'email')"> Email is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'email')"> Email must be at least 6 characters long </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'email')"> Email must not exceed 30 characters</mat-error>
-      <mat-error *ngIf="myForm.hasError('email', 'email')"> Invalid email format </mat-error>
+      <mat-error *ngIf="myForm.hasError('required', 'email')"> Email <strong>Không Được Để Trống</strong></mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'email')"> Email Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'email')"> Email Phải 30 Ký Tự Trở Xuống</mat-error>
+      <mat-error *ngIf="myForm.hasError('email', 'email')"> Email Phải Đúng Định Dạng </mat-error>
     </mat-form-field>
 
     <mat-form-field
       appearance="fill"
       class="form-field"
     >
-      <mat-label>Password</mat-label>
+      <mat-label>Mật Khẩu</mat-label>
       <input
         matInput
         formControlName="password"
@@ -79,18 +73,18 @@
       >
         <mat-icon>{{ hideOne ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="myForm.hasError('required', 'password')"> Password is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'password')">
-        Password must be at least 6 characters long
+      <mat-error *ngIf="myForm.hasError('required', 'password')">
+        Mật Khẩu <strong>Không Được Để Trống</strong>
       </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'password')"> Password must not exceed 30 characters </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'password')"> Mật Khẩu Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'password')"> Mật Khẩu Phải 30 Ký Tự Trở Xuống</mat-error>
     </mat-form-field>
 
     <mat-form-field
       appearance="fill"
       class="form-field"
     >
-      <mat-label>Confirm Password</mat-label>
+      <mat-label>Xác Nhận Mật Khẩu</mat-label>
       <input
         matInput
         formControlName="confirmPassword"
@@ -108,13 +102,13 @@
         <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="myForm.hasError('required', 'confirmPassword')">
-        Confirm Password is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'confirmPassword')">
-        Password must be at least 6 characters long
+        Xác Nhận Mật Khẩu <strong>Không Được Để Trống</strong>
       </mat-error>
       <mat-error *ngIf="myForm.hasError('maxlength', 'confirmPassword')">
-        Password must not exceed 30 characters
+        Xác Nhận Mật Khẩu Phải 30 Ký Tự Trở Xuống
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'confirmPassword')">
+        Xác Nhận Mật Khẩu Phải 6 Ký Tự Trở Lên
       </mat-error>
       <mat-error
         *ngIf="
@@ -122,7 +116,7 @@
           (myForm.get('confirmPassword')?.touched || myForm.get('confirmPassword')?.dirty)
         "
       >
-        Passwords are not the same
+        Mật Khẩu và Xác Nhận Mật Khẩu Không Giống Nhau
       </mat-error>
     </mat-form-field>
 
@@ -130,7 +124,7 @@
       appearance="fill"
       class="form-field"
     >
-      <mat-label>phoneNumber</mat-label>
+      <mat-label>Số Điện Thoại</mat-label>
       <input
         matInput
         formControlName="phoneNumber"
@@ -138,14 +132,10 @@
         placeholder="Enter your phoneNumber"
       />
       <mat-error *ngIf="myForm.hasError('required', 'phoneNumber')">
-        phoneNumber is <strong>required</strong>
+        Số Điện Thoại <strong>Không Được Để Trống</strong>
       </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'phoneNumber')">
-        phoneNumber must be at least 10 characters long
-      </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'phoneNumber')">
-        phoneNumber must not exceed 10 characters
-      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'phoneNumber')"> Số Điện Thoại Phải 10 Ký Tự </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'phoneNumber')"> Số Điện Thoại Phải 10 Ký Tự </mat-error>
       <mat-icon matSuffix>phone</mat-icon>
     </mat-form-field>
 
@@ -162,7 +152,7 @@
           d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
         />
       </svg>
-      <span class="mt-2 text-base leading-normal">Avatar</span>
+      <span class="mt-2 text-base leading-normal">Ảnh Đại Điện</span>
       <input
         type="file"
         class="hidden file-upload"
@@ -176,7 +166,7 @@
       class="submit-button"
       [disabled]="!myForm.valid"
     >
-      Register
+      Đăng Ký Ngay
     </button>
   </form>
 </div>

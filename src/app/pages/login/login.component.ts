@@ -22,7 +22,7 @@ export class LoginComponent {
   ) {}
   myForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
   });
 
   onSubmit() {

@@ -30,8 +30,8 @@ export class MyAddressComponent implements OnInit {
           });
           this.ngOnInit();
         },
-        (err) => {
-          this._snackBar.open(`${err.message}`, 'OK', {
+        (error) => {
+          this._snackBar.open(`${error.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
           });

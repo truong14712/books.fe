@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ModelUpdateBookHightLightComponent } from '@core/components/admin/model-update-book-hight-light/model-update-book-hight-light.component';
 import { Book } from '@core/interfaces/book';
 import { BookService } from '@core/services/book/book.service';
 
@@ -22,8 +24,8 @@ export class ManagementBookComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   constructor(
     private _snackBar: MatSnackBar,
-    private route: Router,
     private book: BookService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -38,18 +40,18 @@ export class ManagementBookComponent implements OnInit {
 
   deleteBook(id: string) {
     if (window.confirm('Are you sure you want to delete this book?')) {
-      this.book.deleteBook(id).subscribe(
-        (data) => {
-          this._snackBar.open(`${data.message}`, 'OK', {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          });
-          this.ngOnInit();
-        },
-      );
+      this.book.deleteBook(id).subscribe((data) => {
+        this._snackBar.open(`${data.message}`, 'OK', {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        this.ngOnInit();
+      });
     }
   }
-  updateBook(id: string) {
-    this.route.navigate(['admin/book/update/' + id]);
+  openModelUpdateBookHightLightComponent(id: string) {
+    this.dialog.open(ModelUpdateBookHightLightComponent, {
+      data: { id },
+    });
   }
 }

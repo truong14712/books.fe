@@ -23,7 +23,6 @@ export class UserNavbarComponent implements OnInit {
     private dialog: MatDialog,
     private book: BookService,
     private cart: CartService,
-    private cdr: ChangeDetectorRef,
   ) {}
   getValue() {
     const value = this.valueInput.nativeElement.value;

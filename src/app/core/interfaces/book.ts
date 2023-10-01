@@ -25,6 +25,7 @@ export interface Book {
   updatedAt: any;
   slug: string;
   quantity?: number;
+  isHighlighted: boolean;
 }
 interface Category {
   _id?: string;

@@ -1,5 +1,5 @@
 <div class="container mx-auto w-[1080px]">
-  <h1 class="text-center">Login</h1>
+  <div class="mt-[2rem] text-center text-[2rem]">Đăng Nhập</div>
   <form
     [formGroup]="myForm"
     (ngSubmit)="onSubmit()"
@@ -16,17 +16,17 @@
         formControlName="email"
         placeholder="Enter your email"
       />
-      <mat-error *ngIf="myForm.hasError('required', 'email')"> Email is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'email')"> Email must be at least 6 characters long </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'email')"> Email must not exceed 30 characters</mat-error>
-      <mat-error *ngIf="myForm.hasError('email', 'email')"> Invalid email format </mat-error>
+      <mat-error *ngIf="myForm.hasError('required', 'email')"> Email <strong>Không Được Để Trống</strong></mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'email')"> Email Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'email')"> Email Phải 30 Ký Tự Trở Xuống</mat-error>
+      <mat-error *ngIf="myForm.hasError('email', 'email')"> Email Phải Đúng Định Dạng </mat-error>
     </mat-form-field>
 
     <mat-form-field
       appearance="fill"
       class="form-field"
     >
-      <mat-label>Password</mat-label>
+      <mat-label>Mật Khẩu</mat-label>
       <input
         matInput
         formControlName="password"
@@ -43,11 +43,11 @@
       >
         <mat-icon>{{ hideOne ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="myForm.hasError('required', 'password')"> Password is <strong>required</strong> </mat-error>
-      <mat-error *ngIf="myForm.hasError('minlength', 'password')">
-        Password must be at least 6 characters long
+      <mat-error *ngIf="myForm.hasError('required', 'password')">
+        Mật Khẩu <strong>Không Được Để Trống</strong>
       </mat-error>
-      <mat-error *ngIf="myForm.hasError('maxlength', 'password')"> Password must not exceed 30 characters </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'password')"> Mật Khẩu Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'password')"> Mật Khẩu Phải 30 Ký Tự Trở Xuống</mat-error>
     </mat-form-field>
 
     <button
@@ -57,7 +57,7 @@
       class="submit-button"
       [disabled]="!myForm.valid"
     >
-      Login
+      Đăng Nhập Ngay
     </button>
   </form>
 </div>
