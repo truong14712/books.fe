@@ -1,0 +1,85 @@
+<div class="container mx-auto w-[1080px]">
+  <div class="mt-[2rem] text-center text-[2rem]">Thay Đổi Thông Tin</div>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+    novalidate
+  >
+    <div>
+      <label>
+        <img
+          *ngIf="user"
+          class="w-[200px] h-[200px] rounded-full cursor-pointer my-4"
+          src="{{ user.avatar.url }}"
+          alt=""
+          appImgDirectiveDirective
+        />
+        <input
+          type="file"
+          id="image"
+          class="hidden file-upload"
+          (change)="onHandleImage($event)"
+        />
+      </label>
+    </div>
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Họ</mat-label>
+      <input
+        matInput
+        formControlName="firstName"
+        type="firstName"
+        placeholder="Enter your firstName"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'firstName')">Họ<strong>Không Được Để Trống</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'firstName')"> Họ Phải Dưới 30 Ký Tự Trở Xuống</mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Tên</mat-label>
+      <input
+        matInput
+        formControlName="lastName"
+        type="lastName"
+        placeholder="Enter your lastName"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'lastName')"> Tên<strong>Không Được Để Trống</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'lastName')"> Tên Phải Dưới 30 Ký Tự Trở Xuống </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Số Điện Thoại</mat-label>
+      <input
+        matInput
+        formControlName="phoneNumber"
+        type="phoneNumber"
+        placeholder="Enter your phoneNumber"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'phoneNumber')">
+        Số Điện Thoại <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'phoneNumber')"> Số Điện Thoại Phải 10 Ký Tự </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'phoneNumber')"> Số Điện Thoại Phải 10 Ký Tự </mat-error>
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="!myForm.valid"
+    >
+      Thay Đổi Ngay
+    </button>
+  </form>
+</div>
