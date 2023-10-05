@@ -1,0 +1,110 @@
+<div>
+  <div class="mt-[2rem] text-center text-[2rem]">Thêm Địa Chỉ</div>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+  >
+    <mat-form-field class="form-field">
+      <mat-label>Đất Nước</mat-label>
+      <mat-select (selectionChange)="onCountrySelection($event.value)">
+        <mat-option
+          *ngFor="let country of countries"
+          [value]="country"
+        >
+          {{ country.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Thành Phố</mat-label>
+      <mat-select (selectionChange)="onStateSelection($event.value)">
+        <mat-option
+          *ngFor="let state of states"
+          [value]="state"
+        >
+          {{ state.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Quận/Huyện</mat-label>
+      <mat-select (selectionChange)="onCitySelection($event.value)">
+        <mat-option
+          *ngFor="let city of cities"
+          [value]="city.name"
+        >
+          {{ city.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Địa Chỉ 1</mat-label>
+      <input
+        matInput
+        formControlName="address1"
+        type="text"
+        placeholder="Enter your address1"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'address1')">
+        Địa Chỉ 1 <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Địa Chỉ 2</mat-label>
+      <input
+        matInput
+        formControlName="address2"
+        type="text"
+        placeholder="Enter your address2"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'address2')">
+        Địa Chỉ 2 <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Mã Bưu Chính</mat-label>
+      <input
+        matInput
+        formControlName="zipCode"
+        type="text"
+        placeholder="Enter your zipCode"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'zipCode')">
+        Mã Bưu Chính <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Kiểu Địa Chỉ</mat-label>
+      <mat-select (selectionChange)="onTypeAddress($event.value)">
+        <mat-option
+          *ngFor="let type of addressTypeData"
+          [value]="type.name"
+        >
+          {{ type.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="mx-2 submit-button"
+        [disabled]="!myForm.valid"
+      >
+        Thêm Địa Chỉ Ngay
+      </button>
+    </div>
+  </form>
+</div>
