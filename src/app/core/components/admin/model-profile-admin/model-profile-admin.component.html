@@ -1,0 +1,77 @@
+<div class="container mx-auto w-[640px]">
+  <div class="p-4 mt-2 text-xl text-blue-600 uppercase">Tài khoản của tôi</div>
+  <div mat-dialog-content>
+    <mat-list role="list">
+      <mat-list-item
+        role="listitem"
+        *ngIf="user.role === 'admin'"
+      >
+        <a routerLink="/admin">
+          <button
+            mat-button
+            color="primary"
+            mat-dialog-close
+            class="w-full"
+          >
+            Trang ADMIN
+          </button>
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a routerLink="/user/profile/myAddress">
+          <button
+            mat-button
+            color="primary"
+            mat-dialog-close
+            class="w-full"
+          >
+            Địa chỉ của tôi
+          </button>
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a routerLink="/user/profile/changeInformation">
+          <button
+            mat-button
+            color="primary"
+            mat-dialog-close
+            class="w-full"
+          >
+            Thay đổi thông tin
+          </button>
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a routerLink="/user/profile/changePassword">
+          <button
+            mat-button
+            color="primary"
+            mat-dialog-close
+            class="w-full"
+          >
+            Thay thôi mật khẩu
+          </button>
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button
+          mat-button
+          color="primary"
+          mat-dialog-close
+          (click)="logout()"
+          class="w-full"
+        >
+          Đăng xuất
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      mat-dialog-close
+    >
+      Đóng
+    </button>
+  </div>
+</div>
