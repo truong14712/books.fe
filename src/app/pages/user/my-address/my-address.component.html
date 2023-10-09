@@ -2,6 +2,7 @@
   <div class="">
     <a
       routerLink="/user/profile/addAddress"
+      *ngIf="user.addresses.length > 0 && user.addresses.length < 2"
       class="p-2 text-base text-white bg-blue-600 rounded"
       >Thêm Địa Chỉ</a
     >
@@ -17,19 +18,13 @@
             scope="col"
             class="px-6 py-3"
           >
-            Địa chỉ 1
+            Địa chỉ
           </th>
           <th
             scope="col"
             class="px-6 py-3"
           >
-            Địa chỉ 2
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3"
-          >
-            Kiểu địa chỉ
+            Loại địa chỉ
           </th>
           <th
             scope="col"
@@ -62,8 +57,7 @@
           class="bg-white"
           *ngFor="let item of user.addresses"
         >
-          <td class="px-6 py-4">{{ item.address1 }}</td>
-          <td class="px-6 py-4">{{ item.address2 }}</td>
+          <td class="px-6 py-4">{{ item.address }}</td>
           <td class="px-6 py-4">{{ item.addressType }}</td>
           <td class="px-6 py-4">{{ item.city }}</td>
           <td class="px-6 py-4">{{ item.country }}</td>

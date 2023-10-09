@@ -55,6 +55,9 @@ export class UpdateBookComponent implements OnInit {
           weight: this.newBook.weight,
           brand: this.newBook.brand,
           stock: this.newBook.stock,
+          selectedCoverType: this.newBook.coverType,
+          selectedCategoryId: this.newBook.categoryId._id,
+          selectedLanguage: this.newBook.language,
         });
         this.selectedCategoryId = this.newBook.categoryId;
         this.selectedCoverType = this.newBook.coverType;
@@ -77,6 +80,9 @@ export class UpdateBookComponent implements OnInit {
     weight: [0, [Validators.required]],
     brand: ['', Validators.required],
     stock: [0, [Validators.required]],
+    selectedLanguage: [this.language, Validators.required],
+    selectedCoverType: [this.coverType, Validators.required],
+    selectedCategoryId: [this.categoryId, Validators.required],
   });
   ngOnInit() {
     this.category.getAllCategory().subscribe(

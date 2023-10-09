@@ -17,7 +17,7 @@
         formControlName="nameCategory"
       />
       <mat-error *ngIf="myForm.hasError('required', 'nameCategory')">
-        Tên Thể Loại is <strong>Không Được Để Trống</strong>
+        Tên Thể Loại <strong>Không Được Để Trống</strong>
       </mat-error>
       <mat-error *ngIf="myForm.hasError('minlength', 'nameCategory')"> Tên Thể Loại Phải 6 Ký Tự Trở Lên </mat-error>
     </mat-form-field>
@@ -31,7 +31,7 @@
         formControlName="description"
       ></textarea>
       <mat-error *ngIf="myForm.hasError('required', 'description')">
-        Mô Tả<strong>Không Được Để Trống</strong>
+        Mô Tả <strong>Không Được Để Trống</strong>
       </mat-error>
     </mat-form-field>
     <button

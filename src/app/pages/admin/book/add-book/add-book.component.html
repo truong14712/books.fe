@@ -21,6 +21,7 @@
         Tên Sách <strong>Không Được Để Trống</strong>
       </mat-error>
       <mat-error *ngIf="myForm.hasError('minlength', 'nameBook')"> Tên Sách Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'nameBook')"> Tên Sách Không Được Chứa Khoảng Trắng </mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -36,6 +37,7 @@
       />
       <mat-error *ngIf="myForm.hasError('required', 'auth')"> Tác Giả <strong>Không Được Để Trống</strong> </mat-error>
       <mat-error *ngIf="myForm.hasError('minlength', 'auth')"> Tác Giả Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'auth')"> Tác Giả Không Được Chứa Khoảng Trắng </mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -50,6 +52,7 @@
         placeholder="Enter your price"
       />
       <mat-error *ngIf="myForm.hasError('required', 'price')"> Giá Gốc <strong>Không Được Để Trống</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'price')"> Giá Gốc Không Được Chứa Khoảng Trắng </mat-error>
     </mat-form-field>
 
     <mat-form-field
@@ -65,6 +68,9 @@
       />
       <mat-error *ngIf="myForm.hasError('required', 'discountPrice')">
         Giá Khuyến Mại <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'discountPrice')">
+        Giá Khuyến Mại Không Được Chứa Khoảng Trắng
       </mat-error>
     </mat-form-field>
 
@@ -160,7 +166,7 @@
         placeholder="Enter your weight"
       />
       <mat-error *ngIf="myForm.hasError('required', 'weight')">
-        Trọng Lượng<strong>Không Được Để Trống</strong>
+        Trọng Lượng <strong>Không Được Để Trống</strong>
       </mat-error>
     </mat-form-field>
 
@@ -176,7 +182,7 @@
         placeholder="Enter your brand"
       />
       <mat-error *ngIf="myForm.hasError('required', 'brand')"
-        >Thương Hiệu<strong>Không Được Để Trống</strong>
+        >Thương Hiệu<strong> Không Được Để Trống </strong>
       </mat-error>
     </mat-form-field>
 
@@ -184,7 +190,7 @@
       appearance="fill"
       class="form-field"
     >
-      <mat-label>Dự Trữ Trong Kho</mat-label>
+      <mat-label> Kho Hàng</mat-label>
       <input
         matInput
         formControlName="stock"
@@ -192,7 +198,7 @@
         placeholder="Enter your stock"
       />
       <mat-error *ngIf="myForm.hasError('required', 'stock')">
-        Dự Trữ Trong Kho <strong>Không Được Để Trống</strong>
+        Kho Hàng <strong>Không Được Để Trống</strong>
       </mat-error>
     </mat-form-field>
 
@@ -214,7 +220,10 @@
 
     <mat-form-field class="form-field">
       <mat-label>Ngôn Ngữ</mat-label>
-      <mat-select (selectionChange)="onLanguageSelection($event.value)">
+      <mat-select
+        (selectionChange)="onLanguageSelection($event.value)"
+        formControlName="selectedLanguage"
+      >
         <mat-option
           *ngFor="let language of listLanguage"
           [value]="language.name"
@@ -222,11 +231,15 @@
           {{ language.name }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'selectedLanguage')"> Vui Lòng Chọn Ngôn Ngữ. </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-field">
       <mat-label>Thể Loại</mat-label>
-      <mat-select (selectionChange)="onCategorySelection($event.value)">
+      <mat-select
+        (selectionChange)="onCategorySelection($event.value)"
+        formControlName="selectedCategoryId"
+      >
         <mat-option
           *ngFor="let category of listCategory"
           [value]="category._id"
@@ -234,11 +247,15 @@
           {{ category.nameCategory }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'selectedCategoryId')"> Vui Lòng Chọn Thể Loại. </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-field">
       <mat-label>Loại Bìa</mat-label>
-      <mat-select (selectionChange)="onSelectionChange($event.value)">
+      <mat-select
+        (selectionChange)="onSelectionChange($event.value)"
+        formControlName="selectedCoverType"
+      >
         <mat-option
           *ngFor="let CoverType of listCoverType"
           [value]="CoverType.name"
@@ -246,6 +263,7 @@
           {{ CoverType.name }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'selectedCoverType')"> Vui Lòng Chọn Loại Bìa. </mat-error>
     </mat-form-field>
 
     <label

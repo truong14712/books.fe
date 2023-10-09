@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Category } from '@core/interfaces/category';
 import { CategoryService } from '@core/services/category/category.service';
+import { noWhitespaceValidator } from '@core/validation/noWhitespaceValidator';
 
 @Component({
   selector: 'app-add-category',
@@ -20,11 +21,12 @@ export class AddCategoryComponent {
     private router: Router,
   ) {}
   myForm = this.FormBuilder.group({
-    nameCategory: ['', [Validators.required, Validators.minLength(6)]],
+    nameCategory: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
     description: ['', [Validators.required]],
   });
   onSubmit() {
-    const category: Category = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const category: any = {
       nameCategory: this.myForm.value.nameCategory || '',
       description: this.myForm.value.description || '',
     };

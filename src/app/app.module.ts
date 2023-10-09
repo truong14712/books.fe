@@ -41,7 +41,8 @@ import { UserHeaderComponent } from '@core/components/user/user-header/user-head
 import { UserLayoutComponent } from '@core/layouts/userLayout/userLayout.component';
 import { UserNavbarComponent } from '@core/components/user/user-navbar/user-navbar.component';
 import { UserSidebarComponent } from '@core/components/user/user-sidebar/user-sidebar.component';
-
+import { SpinnerComponent } from '@core/components/spinner/spinner.component';
+import { ModelShowVoucherComponent } from '@core/components/user/model-show-voucher/model-show-voucher.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,8 @@ import { UserSidebarComponent } from '@core/components/user/user-sidebar/user-si
     ModelAccountComponent,
     TruncatePipe,
     CartComponent,
+    SpinnerComponent,
+    ModelShowVoucherComponent,
   ],
   imports: [
     BrowserModule,

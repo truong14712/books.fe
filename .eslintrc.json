@@ -16,6 +16,7 @@
         "tsconfigRootDir": "./"
       },
       "rules": {
+        "no-console": 1,
         "@angular-eslint/directive-selector": [
           "error",
           {

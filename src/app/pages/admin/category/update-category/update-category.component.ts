@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,7 +25,6 @@ export class UpdateCategoryComponent {
       const id = String(params.get('id'));
       this.category.getOneCategory(id).subscribe(
         ({ data }) => {
-          console.log(data);
           this.newCategory = data;
           this.myForm.patchValue({
             nameCategory: this.newCategory.nameCategory,

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { User } from '@core/interfaces/user';
+import { checkPassword } from '@core/validation/checkPassword';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,7 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
     },
     {
-      validator: this.checkPassword,
+      validator: checkPassword,
     },
   );
 
@@ -42,15 +43,6 @@ export class RegisterComponent {
     if (fileNew) {
       this.avatar = fileNew;
     }
-  }
-  checkPassword(group: FormGroup) {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-
-    if (password === confirmPassword) {
-      return null;
-    }
-    return { passwordMismatch: true };
   }
   onSubmit() {
     const formValue: User = this.myForm?.value as User;

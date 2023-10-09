@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { environment } from '../../../environments/environment.development';
+import { environment } from 'src/app/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User, changeInformation, changePassword } from '@core/interfaces/user';
+import { Addresses, User, changeInformation, changePassword } from '@core/interfaces/user';
+import * as CryptoJS from 'crypto-js';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private API_URL: string = environment.apiUrl;
+  private secretKey: string = environment.secretKey;
 
   constructor(private http: HttpClient) {}
   Register(user: User): Observable<any> {
@@ -24,10 +27,21 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return JSON.parse(localStorage.getItem('user')!) || null;
+    const cipherText = localStorage.getItem('user');
+    if (!cipherText) {
+      return null;
+    }
+    try {
+      const bytes = CryptoJS.AES.decrypt(cipherText, this.secretKey);
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      return decryptedData;
+    } catch (error) {
+      return null;
+    }
   }
 
   logout(): Observable<any> {
+    localStorage.clear();
     return this.http.get(`${this.API_URL}/auth/logout`);
   }
 
@@ -44,21 +58,37 @@ export class AuthService {
   }
 
   setToken(token: string) {
-    return localStorage.setItem('accessToken', JSON.stringify(token));
+    const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(token), this.secretKey).toString();
+    localStorage.setItem('accessToken', encryptedUser);
   }
 
   getToken() {
-    return JSON.parse(localStorage.getItem('accessToken')!) || {};
+    const cipherText = localStorage.getItem('accessToken');
+    if (!cipherText) {
+      return null;
+    }
+    try {
+      const bytes = CryptoJS.AES.decrypt(cipherText, this.secretKey);
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      return decryptedData;
+    } catch (error) {
+      return null;
+    }
   }
 
   setUser(user: User) {
-    return localStorage.setItem('user', JSON.stringify(user));
+    const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(user), this.secretKey).toString();
+    localStorage.setItem('user', encryptedUser);
   }
-
-  updateAddress(data: any) {
-    return this.http.put(`${this.API_URL}/auth/updateAddress`, data);
+  refreshToken(data: any) {
+    return this.http.post(`${this.API_URL}/auth/refreshToken`, data);
   }
-
+  addAddress(data: Addresses) {
+    return this.http.patch(`${this.API_URL}/auth/addAddress`, data);
+  }
+  changeAddressStatus(data: { addressId: string; status: boolean }) {
+    return this.http.patch(`${this.API_URL}/auth/changeAddressStatus`, data);
+  }
   deleteAddress(id: string) {
     return this.http.delete(`${this.API_URL}/auth/deleteAddress/${id}`);
   }

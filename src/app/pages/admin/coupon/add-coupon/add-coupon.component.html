@@ -1,0 +1,126 @@
+<div class="example-container">
+  <h1 class="text-center">Thêm Mã Giảm Giá</h1>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+  >
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Tên Mã Giảm Giá</mat-label>
+      <input
+        matInput
+        placeholder="Name Code"
+        required
+        formControlName="code"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'code')">
+        Tên Mã Giảm Giá <strong>Không Được Để Trống</strong>
+      </mat-error>
+
+      <mat-error *ngIf="myForm.hasError('whitespace', 'code')">Tên Mã Giảm Giá Không Được Chứa Khoảng Trắng </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>% Giảm Giá</mat-label>
+      <input
+        matInput
+        placeholder="Name Discount"
+        required
+        formControlName="discount"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'discount')">
+        % Giảm Giá <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'discount')"> % Giảm Giá Không Được Chứa Khoảng Trắng </mat-error>
+      <mat-error *ngIf="myForm.hasError('maxlength', 'discount')"> % Giảm Giá Phải 3 Ký Tự Trở Xuống </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Chọn Ngày Tháng</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="expirationDate"
+        placeholder="Expiration Date"
+      />
+      <mat-hint>Tháng/Ngày/Năm</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      >
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="myForm.hasError('required', 'expirationDate')">
+        Ngày Tháng <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('pattern', 'expirationDate')"> Định dạng ngày không hợp lệ </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="form-field"
+      appearance="fill"
+    >
+      <mat-label>Mô Tả</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="myForm.hasError('required', 'description')">
+        Mô Tả <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Mua Tối Thiểu</mat-label>
+      <input
+        matInput
+        placeholder="quantity"
+        required
+        formControlName="minAmount"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'minAmount')">
+        Mua Tối Thiểu <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'minAmount')">
+        Mua Tối Thiểu Không Được Chứa Khoảng Trắng
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Số lượng</mat-label>
+      <input
+        matInput
+        placeholder="quantity"
+        required
+        formControlName="quantity"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'quantity')">
+        Số lượng <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'quantity')"> Số lượng Không Được Chứa Khoảng Trắng </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="my-4 submit-button"
+      [disabled]="!myForm.valid"
+    >
+      Thêm Mã Giảm Giá Ngay
+    </button>
+  </form>
+</div>

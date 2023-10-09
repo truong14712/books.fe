@@ -43,30 +43,15 @@
       appearance="fill"
       class="form-field"
     >
-      <mat-label>Địa Chỉ 1</mat-label>
+      <mat-label>Địa Chỉ </mat-label>
       <input
         matInput
-        formControlName="address1"
+        formControlName="address"
         type="text"
-        placeholder="Enter your address1"
+        placeholder="Enter your address"
       />
-      <mat-error *ngIf="myForm.hasError('required', 'address1')">
-        Địa Chỉ 1 <strong>Không Được Để Trống</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field
-      appearance="fill"
-      class="form-field"
-    >
-      <mat-label>Địa Chỉ 2</mat-label>
-      <input
-        matInput
-        formControlName="address2"
-        type="text"
-        placeholder="Enter your address2"
-      />
-      <mat-error *ngIf="myForm.hasError('required', 'address2')">
-        Địa Chỉ 2 <strong>Không Được Để Trống</strong>
+      <mat-error *ngIf="myForm.hasError('required', 'address')">
+        Địa Chỉ <strong>Không Được Để Trống</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field

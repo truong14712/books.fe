@@ -1,4 +1,4 @@
-<div class="container mx-auto">
+<div class="container mx-auto w-[1440px]">
   <div>
     <button
       mat-raised-button
@@ -58,13 +58,13 @@
             *matCellDef="let element"
           >
             <a routerLink="/admin/category/update/{{ element._id }}">
-              <button class="p-3 mx-2 hover:text-blue-600">Cập Nhật</button></a
-            >
+              <button class="p-3 mx-2 hover:text-blue-600"><i class="fa-regular fa-pen-to-square"></i></button
+            ></a>
             <button
               class="p-3 mx-2 hover:text-red-500"
               (click)="deleteCategory(element._id)"
             >
-              Xóa
+              <i class="fa-solid fa-trash"></i>
             </button>
           </td>
         </ng-container>

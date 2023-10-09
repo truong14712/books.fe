@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from '@angular/router';
 import { language } from '@core/constants/language';
 import { coverType } from '@core/constants/coverType';
+import { noWhitespaceValidator } from '@core/validation/noWhitespaceValidator';
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -25,10 +26,10 @@ export class AddBookComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   myForm = this.FormBuilder.group({
-    nameBook: ['', [Validators.required, Validators.minLength(6)]],
-    auth: ['', [Validators.required, Validators.minLength(6)]],
-    price: [0, [Validators.required]],
-    discountPrice: [0, [Validators.required]],
+    nameBook: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
+    auth: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
+    price: [0, [Validators.required, noWhitespaceValidator]],
+    discountPrice: [0, [Validators.required, noWhitespaceValidator]],
     description: ['', [Validators.required]],
     pageNumber: [0, [Validators.required]],
     publisher: ['', [Validators.required, Validators.minLength(6)]],
@@ -38,6 +39,9 @@ export class AddBookComponent implements OnInit {
     weight: [0, [Validators.required]],
     brand: ['', Validators.required],
     stock: [0, [Validators.required]],
+    selectedLanguage: [this.language, Validators.required],
+    selectedCoverType: [this.coverType, Validators.required],
+    selectedCategoryId: [this.categoryId, Validators.required],
   });
   constructor(
     private FormBuilder: FormBuilder,

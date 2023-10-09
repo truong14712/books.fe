@@ -4,8 +4,10 @@ import { AdminLayoutComponent } from '@core/layouts/adminLayout/adminLayout.comp
 import { AdminRoutingModule } from '@core/modules/admin/admin-routing.module';
 import { AuthRoutingModule } from './core/modules/auth/auth-routing.module';
 import { BookDetailComponent } from '@pages/book-detail/book-detail.component';
+import { CartComponent } from '@pages/user/cart/cart.component';
 import { CategoryDetailComponent } from '@pages/category-detail/category-detail.component';
 import { HomeComponent } from '@pages/home/home.component';
+import { ListCategoryComponent } from '@pages/list-category/list-category.component';
 import { LoginComponent } from '@pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from '@pages/pageNotFound/pageNotFound.component';
@@ -13,7 +15,6 @@ import { RegisterComponent } from '@pages/register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserGuard } from '@core/guards/user.guard';
 import { UserLayoutComponent } from '@core/layouts/userLayout/userLayout.component';
-import { CartComponent } from '@pages/user/cart/cart.component';
 const routes: Routes = [
   {
     path: '',
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'user/cart',
         component: CartComponent,
+      },
+      {
+        path: 'all/categories',
+        component: ListCategoryComponent,
       },
     ],
   },

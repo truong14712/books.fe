@@ -2,7 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { addressTypeData } from '@core/constants/addressTypeData';
+import { User } from '@core/interfaces/user';
 import { AuthService } from '@core/services/auth/auth.service';
 import { Country, State, City, ICountry, IState, ICity } from 'country-state-city';
 @Component({
@@ -11,7 +13,7 @@ import { Country, State, City, ICountry, IState, ICity } from 'country-state-cit
   styleUrls: ['./add-address.component.css'],
 })
 export class AddAddressComponent implements OnInit {
-  user!: any;
+  user!: User;
 
   countries: ICountry[] = Country.getAllCountries();
   states: IState[] = [];
@@ -31,20 +33,20 @@ export class AddAddressComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   myForm = this.formBuilder.group({
     zipCode: ['', [Validators.required]],
-    address1: ['', [Validators.required]],
-    address2: ['', [Validators.required]],
+    address: ['', [Validators.required]],
   });
 
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
     private _snackBar: MatSnackBar,
+    private route: Router,
   ) {}
 
   ngOnInit() {
     this.user = this.auth.isAuthenticated();
   }
-  onCountrySelection(Country: any) {
+  onCountrySelection(Country: { isoCode: string; name: string }) {
     this.selectedCountry = Country.isoCode;
     this.countryName = Country.name;
 
@@ -52,7 +54,7 @@ export class AddAddressComponent implements OnInit {
       this.states = State.getStatesOfCountry(this.selectedCountry);
     }
   }
-  onStateSelection(State: any) {
+  onStateSelection(State: { isoCode: string; name: string }) {
     this.selectedState = State.isoCode;
     this.stateName = State.name;
 
@@ -73,20 +75,20 @@ export class AddAddressComponent implements OnInit {
         country: this.countryName,
         state: this.stateName,
         city: this.cityName,
-        zipCode: this.myForm.value.zipCode,
-        address1: this.myForm.value.address1,
-        address2: this.myForm.value.address2,
+        zipCode: this.myForm.value.zipCode as string,
+        address: this.myForm.value.address as string,
         addressType: this.addressType,
       };
-      this.auth.updateAddress(address).subscribe(
+      this.auth.addAddress(address).subscribe(
         (data: any) => {
           this.auth.setUser(data.data);
+          this.route.navigate(['/user/profile/myAddress']);
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
           });
         },
-        (error) => {
+        ({ error }) => {
           this._snackBar.open(`${error.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
