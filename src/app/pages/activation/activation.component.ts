@@ -31,14 +31,16 @@ export class ActivationComponent implements OnInit {
             this._snackBar.open(`${data.message}`, 'OK', {
               horizontalPosition: this.horizontalPosition,
               verticalPosition: this.verticalPosition,
+              duration: 2000,
             });
             this.success = data.message;
-            this.routerNavigate.navigate(['/login']);
+            this.routerNavigate.navigate(['buyer/login']);
           },
           (err) => {
             this._snackBar.open(`${err.error.message}`, 'OK', {
               horizontalPosition: this.horizontalPosition,
               verticalPosition: this.verticalPosition,
+              duration: 2000,
             });
             this.error = err.error.message;
           },

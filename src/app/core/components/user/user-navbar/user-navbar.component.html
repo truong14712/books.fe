@@ -1,6 +1,6 @@
 <!-- Main navigation container -->
 <nav
-  class="relative flex flex-no-wrap items-center justify-between w-full py-2 shadow-md shadow-black/5 lg:flex-wrap lg:justify-start lg:py-4"
+  class="relative flex flex-no-wrap items-center justify-between w-full py-2 shadow-md bg-gray-50 shadow-black/5 lg:flex-wrap lg:justify-start"
 >
   <div class="flex flex-wrap items-center justify-between w-full px-3">
     <!-- Hamburger button for mobile view -->
@@ -120,7 +120,7 @@
         <div
           class="absolute top-0 rounded-3xl bg-red-600 w-[18px] h-[18px] left-[34px] flex items-center justify-center text-white text-xs font-medium"
         >
-          {{ cartItemCount }}
+          {{ cartItemCount || 0 }}
         </div>
       </a>
 
