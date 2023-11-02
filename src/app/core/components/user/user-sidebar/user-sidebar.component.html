@@ -1,0 +1,247 @@
+<div class="container flex flex-col w-[22rem]">
+  <div class="flex items-center">
+    <i class="mr-3 fa-solid fa-bars"></i>
+    <a
+      class="text-base font-semibold leading-[3rem]"
+      href="all/categories"
+      >TẤT CẢ THỂ LOẠI</a
+    >
+  </div>
+  <div class="text-[rgba(0,0,0,.8)]">
+    <div
+      *ngFor="let book of getDisplayedItemsCategory(); let i = index"
+      class="flex flex-col justify-center mx-4 cursor-pointer"
+    >
+      <a
+        class="p-3"
+        routerLink="/category-detail/{{ book.slug }}/{{ book._id }}"
+      >
+        <button class="hover:text-red-500">
+          {{ book.nameCategory }}
+        </button></a
+      >
+    </div>
+    <div
+      *ngIf="!showMoreContent"
+      class="text-center text-blue-600"
+    >
+      <button (click)="showMore()">Xem thêm <i class="fa-solid fa-caret-down"></i></button>
+    </div>
+
+    <div *ngIf="showMoreContent">
+      <div
+        *ngFor="let book of getRemainingItemsCategory(); let i = index"
+        class="flex flex-col justify-center cursor-pointer"
+      >
+        <a
+          class="p-3"
+          href="/category-detail/{{ book.slug }}/{{ book._id }}"
+        >
+          <button class="hover:text-red-500">
+            {{ book.nameCategory }}
+          </button>
+        </a>
+      </div>
+      <div class="text-center text-blue-600">
+        <button (click)="showLess()">Rút gọn <i class="fa-solid fa-caret-up"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col my-4">
+    <div class="flex items-center">
+      <i class="mr-3 fa-solid fa-filter"></i>
+      <div class="text-base font-semibold leading-[3rem]">BỘ LỌC TÌM KIẾM</div>
+    </div>
+    <h4 class="">GIÁ</h4>
+    <div>
+      <ul>
+        <li
+          *ngFor="let price of listPrice; let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckbox(price)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="price.isChecked"
+              class="mr-2"
+              (change)="price.isChecked && priceFilter(price.minPrice, price.maxPrice)"
+              (change)="onChangeCheckbox(price)"
+              [checked]="isSelected(price)"
+            />
+            <span>{{ price.name }}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <h4>NHÀ XUẤT BẢN</h4>
+    <div>
+      <ul>
+        <li
+          *ngFor="let publisher of getDisplayedItemsPublishers(); let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckboxPublishers(publisher)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="publisher.isChecked"
+              class="mr-2"
+              (change)="publisher.isChecked && publisherNameFilter(publisher.name)"
+              (change)="onChangeCheckboxPublishers(publisher)"
+              [checked]="isSelectedPublishers(publisher)"
+            />
+            <span>{{ publisher.name }}</span>
+          </button>
+        </li>
+        <div
+          *ngIf="!showMorePublisher"
+          class="text-center text-blue-600"
+        >
+          <button (click)="showMorePublishers()">Xem thêm <i class="fa-solid fa-caret-down"></i></button>
+        </div>
+      </ul>
+      <ul *ngIf="showMorePublisher">
+        <li
+          *ngFor="let publisher of getRemainingItemsPublishers(); let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckboxPublishers(publisher)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="publisher.isChecked"
+              class="mr-2"
+              (change)="publisher.isChecked && publisherNameFilter(publisher.name)"
+              (change)="onChangeCheckboxPublishers(publisher)"
+              [checked]="isSelectedPublishers(publisher)"
+            />
+            <span>{{ publisher.name }}</span>
+          </button>
+        </li>
+        <div class="text-center text-blue-600">
+          <button (click)="showLessPublishers()">Hiển thị ít lại <i class="fa-solid fa-caret-up"></i></button>
+        </div>
+      </ul>
+    </div>
+    <h4>TÁC GIẢ</h4>
+    <div>
+      <ul>
+        <li
+          *ngFor="let auth of getDisplayedItemsAuthors(); let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckboxAuth(auth)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="auth.isChecked"
+              class="mr-2"
+              (change)="auth.isChecked && authFilter(auth.name)"
+              (change)="onChangeCheckboxAuth(auth)"
+              [checked]="isSelectedAuth(auth)"
+            />
+            <span>{{ auth.name }}</span>
+          </button>
+        </li>
+        <div
+          *ngIf="!showMoreAuthor"
+          class="my-2 text-center text-blue-600"
+        >
+          <button
+            (click)="showMoreAuth()"
+            class=""
+          >
+            Xem thêm <i class="fa-solid fa-caret-down"></i>
+          </button>
+        </div>
+      </ul>
+      <ul *ngIf="showMoreAuthor">
+        <li
+          *ngFor="let auth of getRemainingItemsAuthors(); let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckboxAuth(auth)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="auth.isChecked"
+              class="mr-2"
+              (change)="auth.isChecked && authFilter(auth.name)"
+              (change)="onChangeCheckboxAuth(auth)"
+              [checked]="isSelectedAuth(auth)"
+            />
+            <span>{{ auth.name }}</span>
+          </button>
+        </li>
+        <div class="my-2 text-center text-blue-600">
+          <button (click)="showLessAuth()">Rút gọn <i class="fa-solid fa-caret-up"></i></button>
+        </div>
+      </ul>
+    </div>
+    <h4>HÌNH THỨC</h4>
+    <div>
+      <ul>
+        <li
+          *ngFor="let auth of getDisplayedItemsCoverType(); let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckboxCoverType(auth)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="auth.isChecked"
+              class="mr-2"
+              (change)="auth.isChecked && coverTypeFilter(auth.name)"
+              (change)="onChangeCheckboxCoverType(auth)"
+              [checked]="isSelectedCoverType(auth)"
+            />
+            <span>{{ auth.name }}</span>
+          </button>
+        </li>
+        <div
+          *ngIf="!showMoreCoverType"
+          class="my-2 text-center text-blue-600"
+        >
+          <button (click)="showMoreCoverTypes()">Xem thêm <i class="fa-solid fa-caret-down"></i></button>
+        </div>
+      </ul>
+      <ul *ngIf="showMoreCoverType">
+        <li
+          *ngFor="let auth of getRemainingItemsCoverType(); let index"
+          class="flex items-center px-1 py-2"
+        >
+          <button
+            (click)="toggleCheckboxCoverType(auth)"
+            class="cursor-pointer hover:text-red-500"
+          >
+            <input
+              type="checkbox"
+              [(ngModel)]="auth.isChecked"
+              class="mr-2"
+              (change)="auth.isChecked && coverTypeFilter(auth.name)"
+              (change)="onChangeCheckboxCoverType(auth)"
+              [checked]="isSelectedCoverType(auth)"
+            />
+            <span>{{ auth.name }}</span>
+          </button>
+        </li>
+        <div class="my-2 text-center text-blue-600">
+          <button (click)="showLessCoverType()">Rút gọn <i class="fa-solid fa-caret-up"></i></button>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
