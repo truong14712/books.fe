@@ -1,0 +1,222 @@
+<div class="container mx-auto my-5 w-[1280px]">
+  <div
+    class="mt-4 mb-5"
+    *ngIf="!isLoading"
+  >
+    <div
+      class="px-5 my-2 text-xl font-medium"
+      *ngIf="listEvent.length > 0 && countdown.seconds > 0"
+    >
+      Khuyến mãi sản phẩm
+    </div>
+    <div
+      class="px-5 border shadow"
+      *ngIf="listEvent.length > 0 && countdown.seconds > 0"
+    >
+      <ng-container *ngFor="let book of listEvent">
+        <div
+          class="flex items-center my-3"
+          *ngIf="book.status_Date === 'Đang chạy'"
+        >
+          <img
+            src="{{ book.images[3].url }}"
+            alt="{{ book.nameBook }}"
+            class="w-[140px] h-[140px]"
+          />
+          <div class="ml-5 w-[500px]">
+            <div class="">{{ book.nameBook }}</div>
+            <div class="flex items-center my-1">
+              <span class="">đ{{ book.price.toLocaleString('de-DE') }}</span>
+              <span class="mx-2">đ{{ book.discountPrice.toLocaleString('de-DE') }}</span>
+              <span class="text-lg text-red-500">
+                Giảm {{ roundPercentage(((book.price - book.discountPrice) / book.price) * 100) }}%</span
+              >
+            </div>
+            <div class="mb-2">Tác giả: {{ book.auth }}</div>
+            <div class="flex items-center">
+              <button
+                class="flex items-center px-5 py-3 rounded-sm w-[170px] h-[40px] mr-3 justify-center border"
+                (click)="showDetail(book.slug, book._id)"
+              >
+                Xem chi tiết
+              </button>
+              <button
+                class="flex items-center px-5 py-3 text-white rounded-sm bg-blue-700 w-[170px] h-[40px] justify-center border"
+                (click)="addToCart(book, book._id)"
+              >
+                Thêm vào giỏ hàng
+              </button>
+            </div>
+          </div>
+          <div class="">
+            <div class="my-2">Thời gian đếm ngược</div>
+            <h1>
+              {{ countdown.days }} Ngày {{ countdown.hours }} Giờ {{ countdown.minutes }} Phút
+              {{ countdown.seconds }} Giây
+            </h1>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div *ngIf="!listEvent">Không có dữ liệu</div>
+  </div>
+  <div
+    class="flex"
+    *ngIf="!isLoading"
+  >
+    <app-user-sidebar
+      [listBook]="listBook"
+      (listBookChange)="handleListBookChange($event)"
+    ></app-user-sidebar>
+
+    <div class="px-3 border-l">
+      <div class="shopee-sort-bar">
+        <span class="shopee-sort-bar__label">Sắp xếp theo</span>
+        <div class="shopee-sort-by-options">
+          <div
+            class="shopee-sort-by-options__option shopee-sort-by-options__option--selected"
+            [class.shopee-sort-by-options__option--selected]="isHighlighted"
+          >
+            <button (click)="handleSortBookHightLight()">Nổi bật</button>
+          </div>
+          <div
+            class="shopee-sort-by-options__option"
+            [class.shopee-sort-by-options__option--selected]="isBookLatest"
+          >
+            <button (click)="handleSortBookLatest()">Mới nhất</button>
+          </div>
+          <div class="select-with-status">
+            <div class="select-with-status__holder select-with-status__box-shadow">
+              <span
+                class="select-with-status__placeholder"
+                (mouseenter)="showOptions = true"
+                (mouseleave)="showOptions = false"
+                >Giá</span
+              >
+              <span><i class="fa-solid fa-chevron-down icon-arrow-down-small"></i></span>
+              <div
+                class="absolute bottom-[-70px] left-0 z-20 border bg-white rounded w-full shadow-sm"
+                [class.hidden]="!showOptions"
+                (mouseenter)="showOptions = true"
+                (mouseleave)="showOptions = false"
+              >
+                <button
+                  class="px-[15px] hover:text-red-500"
+                  (click)="handleOptionSorPrice('Giá: Thấp đến Cao')"
+                >
+                  Giá: Thấp đến Cao
+                </button>
+                <button
+                  class="px-[15px] hover:text-red-500"
+                  (click)="handleOptionSorPrice('Giá: Cao đến Thấp')"
+                >
+                  Giá: Cao đến Thấp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="grid gap-[2rem] lg:grid-cols-3">
+          <div
+            class="py-2 my-4 border rounded-md w-72 lg:mb-0 hover:border-blue-300"
+            *ngFor="let book of listBook.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+          >
+            <a routerLink="/book-detail/{{ book.slug }}/{{ book._id }}">
+              <div class="relative">
+                <img
+                  src="{{ book.images[3].url }}"
+                  class="object-contain w-full h-44 via-inherit"
+                  alt=""
+                  appImgDirectiveDirective
+                />
+                <div class="absolute top-0 right-[45px]">
+                  <div
+                    class=""
+                    *ngIf="book.discountPrice !== 0"
+                  >
+                    <i class="relative flex items-center text-4xl text-yellow-300 fa fa-certificate fa-stack-2x">
+                      <span class="absolute top-[10px] right-[2px] text-sm text-red-600">
+                        -{{ roundPercentage(((book.price - book.discountPrice) / book.price) * 100) }}%
+                      </span>
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div class="">
+                <div class="flex items-center justify-between px-4 pt-4">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-bookmark"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="#2c3e50"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        stroke="none"
+                        d="M0 0h24v24H0z"
+                        fill="none"
+                      />
+                      <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
+                    </svg>
+                  </div>
+                  <div class="bg-yellow-200 py-1.5 px-6 rounded-full">
+                    <div class="text-xs text-yellow-700">{{ book.categoryId.nameCategory }}</div>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <div class="flex items-center">
+                    <div class="text-sm font-semibold">{{ book.nameBook }}</div>
+                  </div>
+                  <div class="py-2 text-xs text-gray-600">{{ convertToRelativeTime(book.createdAt) }}</div>
+                  <div class="flex items-center justify-between py-2">
+                    <div
+                      *ngIf="book.discountPrice !== 0"
+                      class="text-xl font-bold text-red-500"
+                    >
+                      {{ book.discountPrice.toLocaleString('de-DE') }}đ
+                    </div>
+                    <div
+                      *ngIf="book.discountPrice === 0"
+                      class="text-xl font-bold text-red-500"
+                    >
+                      {{ book.price.toLocaleString('de-DE') }}đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="flex items-center justify-center gap-3 mt-3">
+          <button
+            class="p-2 bg-gray-200 w-[160px] rounded-sm h-[40px]"
+            (click)="handlePageChange(currentPage - 1)"
+            [disabled]="currentPage === 1"
+            [style.opacity]="currentPage === 1 ? 0.5 : 1"
+          >
+            Trang trước
+          </button>
+          <div>Trang {{ currentPage }} / {{ totalPage }}</div>
+          <button
+            class="p-2 bg-gray-200 w-[160px] rounded-sm h-[40px]"
+            (click)="handlePageChange(currentPage + 1)"
+            [disabled]="currentPage === totalPage"
+            [style.opacity]="currentPage === totalPage ? 0.5 : 1"
+          >
+            Trang kế tiếp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoading">Loading...</div>
+</div>
