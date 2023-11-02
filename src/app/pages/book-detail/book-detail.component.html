@@ -1,0 +1,468 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<div
+  class="container mx-auto my-8 w-[1440px]"
+  *ngIf="!isLoading"
+>
+  <div class="py-3">
+    <span class="uppercase hover:text-blue-500">
+      <a routerLink="/"> Sách tiếng việt </a>
+    </span>
+    <i class="fa-solid fa-angle-right"></i>
+    <span class="uppercase hover:text-blue-500">
+      <a routerLink="/category-detail/{{ book.categoryId.slug }}/{{ book.categoryId._id }}">
+        {{ book.categoryId.nameCategory }}
+      </a>
+    </span>
+    <i class="fa-solid fa-angle-right"></i>
+    <span class="text-blue-500 uppercase hover:text-blue-700"> {{ book.nameBook }} </span>
+  </div>
+  <div class="flex gap-10">
+    <div class="w-2/5 p-2">
+      <div class="mb-3">
+        <img
+          class="w-[450px] h-[450px] object-contain object-center block cursor-pointer border border-blue-300"
+          [src]="selectedImage ? selectedImage : book.images[3].url"
+          alt=""
+          appImgDirectiveDirective
+        />
+      </div>
+      <div class="flex items-center gap-6">
+        <div
+          *ngFor="let item of book.images"
+          class="p-2"
+        >
+          <img
+            class="block object-contain object-center w-[82px] h-[82px] hover:border hover:shadow-md hover:shadow-blue-300 hover:border-blue-300 p-3 cursor-pointer rounded-sm"
+            [src]="item.url"
+            (click)="selectedImage = item.url"
+            alt=""
+            appImgDirectiveDirective
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-3/5 p-2">
+      <div class="font-medium text-[20px] text-[#333]">{{ book.nameBook }}</div>
+      <div class="py-4">
+        <div class="my-1">
+          Tác giả: <span class="font-medium">{{ book.auth }}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            Nhà xuất bản: <span class="font-medium">{{ book.publisher }}</span>
+          </div>
+          <div>
+            Hình thức bìa: <span class="font-medium">{{ book.coverType }}</span>
+          </div>
+        </div>
+        <div class="flex items-center my-2">
+          <span
+            class="_046PXf"
+            *ngIf="book.ratings >= 1"
+            >{{ book.ratings }}</span
+          >
+          <ng-container *ngIf="book.ratings >= 1">
+            <ng-container *ngFor="let rating of getStarArray(book.ratings)">
+              <i class="fa-solid fa-star shopee-rating-stars__primary-star"></i>
+            </ng-container>
+          </ng-container>
+          <span class="pl-2 ml-2 border-l"
+            ><span class="text-base text-[#222] pb-[1px] border-b border-solid border-[#555]">{{
+              showOriginalReviews()
+            }}</span>
+            <span class="nTpKes"> Đánh giá </span>
+          </span>
+          <span class="pl-2 ml-2 border-l"
+            ><span class="text-base text-[#222]">{{ book.sold_out }}</span> <span class="nTpKes"> Đã bán </span></span
+          >
+        </div>
+        <div>
+          <div class="flex items-center py-4">
+            <span
+              *ngIf="book.discountPrice !== 0"
+              class="mr-1 text-3xl font-medium text-red-600"
+              >{{ book.discountPrice.toLocaleString('de-DE') }}₫</span
+            >
+            <span
+              class="  {{
+                book.discountPrice === 0 ? 'text-3xl font-medium text-red-600' : 'ml-2 text-sm font-light line-through'
+              }}"
+              >{{ book.price.toLocaleString('de-DE') }}₫</span
+            >
+            <span
+              *ngIf="book.discountPrice !== 0"
+              class="p-1 ml-2 font-medium text-white bg-red-600 rounded-[4px]"
+              >Giảm {{ calculatePercentage() }}%</span
+            >
+          </div>
+          <div class="flex items-center">
+            <label class="font-medium text-[1.2rem] max-w-[200px] min-w-[150px] mr-2">Số lượng</label>
+            <div class="border rounded-md">
+              <a
+                alt=""
+                class="p-4 cursor-pointer"
+                (click)="decreaseQuantity()"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </a>
+              <input
+                class="w-[47px] h-[30px] text-center border outline-0"
+                type="text"
+                (keydown)="handleInput($event)"
+                [(ngModel)]="value"
+                min="1"
+                max="999"
+                disabled="{{ value === 1 ? 'disabled' : '' }}"
+              />
+              <a
+                alt=""
+                class="p-4 cursor-pointer"
+                (click)="increaseQuantity()"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center py-4">
+        <div class="">
+          <button
+            mat-stroked-button
+            color="primary"
+            class="w-[220px]"
+            (click)="addToCart(book.stock, book._id)"
+          >
+            <i class="text-base fa-solid fa-cart-shopping"></i>
+            Thêm vào giỏ hàng
+          </button>
+        </div>
+        <div class="">
+          <a routerLink="/user/cart">
+            <button
+              class="w-[220px] ml-[10px]"
+              mat-raised-button
+              color="primary"
+            >
+              Mua ngay
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="listCoupon && listCoupon.length > 0">
+    <div class="p-2 pt-3 my-4 text-xl font-medium uppercase border-t border-dashed border-t-gray-300">mã giảm giá</div>
+    <div class="flex items-center">
+      <div
+        class="flex items-center mx-1 border shadow-md"
+        *ngFor="let coupon of listCoupon.slice(0, 3)"
+      >
+        <ng-container>
+          <img
+            src="https://static.kinhtedothi.vn/w960/images/upload/2022/09/26/24bbd999-ff5d-4293-ab90-19e75a0ea6c9.png"
+            alt=""
+            class="h-full w-[200px] p-2"
+          />
+          <div class="px-4 py-5">
+            <div class="ite_txt_right">
+              Mã giảm giá {{ coupon.discount }}% - đơn hàng {{ coupon.minAmount.toLocaleString('de-DE') }}
+            </div>
+            <button
+              class="my-2 text-blue-500"
+              (click)="handleVoucherDetail(coupon._id)"
+            >
+              Chi tiết
+            </button>
+          </div>
+        </ng-container>
+      </div>
+      <button
+        class="evt_cart_2_slide_ite_last"
+        *ngIf="listCoupon && listCoupon.length > 3"
+        (click)="openShowVoucher()"
+      >
+        <span class="evt_cart_2_view_more"></span>
+        Xem thêm Mã
+      </button>
+    </div>
+  </ng-container>
+  {{ booksOfCategory() }}
+  <div>
+    <div class="p-2 pt-3 my-4 text-xl font-medium uppercase border-t border-dashed border-t-gray-300">
+      Sách cùng thể loại
+    </div>
+    <div class="flex flex-wrap items-center gap-10 py-2">
+      <div
+        *ngFor="let book of listBookCategory; index as i"
+        class="w-[244px] px-[10px]"
+      >
+        <a routerLink="/book-detail/{{ book.slug }}/{{ book._id }}">
+          <div class="relative p-2">
+            <img
+              [src]="book.images[3].url"
+              alt=""
+              class="object-contain object-center max-w-full max-h-[190px] h-auto w-[190px]"
+            />
+            <div>
+              <div
+                class="absolute bg-blue-600 rounded-[22px] top-[10px] right-[8px] w-[44px] h-[44px] z-1 flex items-center justify-center"
+                *ngIf="book.discountPrice !== 0"
+              >
+                <span class="text-base font-medium text-white"
+                  >{{ roundPercentage(((book.price - book.discountPrice) / book.price) * 100) }}%</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="my-1 uppercase">
+            {{ book.nameBook }}
+          </div>
+        </a>
+        <div
+          *ngIf="book.discountPrice !== 0"
+          class="mt-1 text-base font-medium text-red-600"
+        >
+          {{ book.discountPrice.toLocaleString('de-DE') }} đ
+        </div>
+        <div
+          class="  {{
+            book.discountPrice === 0
+              ? 'my-1 text-base font-medium text-red-600'
+              : 'my-1 text-sm font-light line-through'
+          }}"
+        >
+          {{ book.price.toLocaleString('de-DE') }} đ
+        </div>
+        <div
+          class="flex items-center my-2"
+          *ngIf="book.ratings >= 1"
+        >
+          <ng-container *ngFor="let rating of getStarArray(book.ratings)">
+            <i class="fa-solid fa-star shopee-rating-stars__primary-star"></i>
+          </ng-container>
+          <span class="ml-1 text-orange-600"> ({{ showOriginalReviews() }} đánh giá) </span>
+        </div>
+      </div>
+    </div>
+    {{ booksOfAuthor() }}
+    <div class="p-2 pt-3 my-4 text-xl font-medium uppercase border-t border-dashed border-t-gray-300">
+      Sách cùng tác giả
+    </div>
+    <div class="flex flex-wrap items-center gap-10 py-2">
+      <div
+        *ngFor="let book of listBookAuthor; index as i"
+        class="w-[244px] px-[10px]"
+      >
+        <a routerLink="/book-detail/{{ book.slug }}/{{ book._id }}">
+          <div class="relative p-2">
+            <img
+              src="{{ book.images[3].url }}"
+              alt=""
+              class="object-contain object-center max-w-full max-h-[190px] h-auto w-[190px]"
+            />
+            <div>
+              <div
+                *ngIf="book.discountPrice !== 0"
+                class="absolute bg-blue-600 rounded-[22px] top-[10px] right-[8px] w-[44px] h-[44px] z-1 flex items-center justify-center"
+              >
+                <span class="text-base font-medium text-white"
+                  >{{ roundPercentage(((book.price - book.discountPrice) / book.price) * 100) }}%</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="my-1 uppercase">
+            {{ book.nameBook }}
+          </div>
+        </a>
+        <div
+          *ngIf="book.discountPrice !== 0"
+          class="mt-1 text-base font-medium text-red-600"
+        >
+          {{ book.discountPrice.toLocaleString('de-DE') }} đ
+        </div>
+        <div
+          class="  {{
+            book.discountPrice === 0
+              ? 'my-1 text-base font-medium text-red-600'
+              : 'my-1 text-sm font-light line-through'
+          }}"
+        >
+          {{ book.price.toLocaleString('de-DE') }} đ
+        </div>
+        <div
+          class="flex items-center my-2"
+          *ngIf="book.ratings >= 1"
+        >
+          <ng-container *ngFor="let rating of getStarArray(book.ratings)">
+            <i class="fa-solid fa-star shopee-rating-stars__primary-star"></i>
+          </ng-container>
+          <span class="ml-1 text-orange-600"> ({{ showOriginalReviews() }} đánh giá) </span>
+        </div>
+      </div>
+      <div
+        *ngIf="listBookAuthor.length === 0"
+        class="flex items-center justify-center text-xl uppercase"
+      >
+        <div class="p-2">Không có sản phẩm cùng tác giả này</div>
+      </div>
+    </div>
+    <div class="p-2 pt-3 my-4 text-xl font-medium uppercase border-t border-dashed border-t-gray-300">
+      Chi tiết sản phẩm
+    </div>
+    <div>
+      <div class="my-6 bg-white rounded shadow-md">
+        <table class="w-full table-auto">
+          <tbody class="grid grid-cols-1 text-sm font-light text-gray-600">
+            <ng-container *ngFor="let item of objectEntries(book)">
+              <ng-container *ngIf="!excludeKeys.includes(item[0])">
+                <ng-container *ngIf="item[1] !== ' '">
+                  <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <th class="px-6 py-3 text-left w-[300px]">{{ keyMappings[item[0]] || item[0] }}</th>
+                    <td class="px-6 py-3 text-left whitespace-nowrap">{{ valueMappings[item[1]] || item[1] }}</td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="p-2 pt-3 my-4 text-xl font-medium uppercase border-t border-dashed border-t-gray-300">
+      Mô tả sản phẩm
+    </div>
+    <div [ngClass]="{ expanded: showFullDescription }">
+      <ng-container *ngIf="!showFullDescription; else fullDescription">
+        <div class="p-2 tracking-wider">
+          {{ description | truncate: 6 }}
+        </div>
+        <div class="py-4 text-center">
+          <button
+            class="w-[210px] h-[40px] border-blue-600 border-[2px] rounded-md text-sm text-blue-600 max-h-full max-w-full font-semibold"
+            (click)="showFullDescription = true"
+          >
+            Xem Thêm
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #fullDescription>
+        <div class="p-2 tracking-wider">
+          {{ description }}
+        </div>
+        <div class="py-4 text-center">
+          <button
+            class="w-[210px] h-[40px] border-blue-600 border-[2px] rounded-md text-sm text-blue-600 max-h-full max-w-full font-semibold"
+            (click)="showFullDescription = false"
+          >
+            Rút Gọn
+          </button>
+        </div>
+      </ng-template>
+    </div>
+    <div class="p-2 pt-3 my-4 text-xl font-medium uppercase border-t border-dashed border-t-gray-300">
+      Đánh giá sản phẩm
+    </div>
+    <div class="product-ratings">
+      <div class="product-rating-overview">
+        <div class="product-rating-overview__briefing">
+          <div class="product-rating-overview__score-wrapper">
+            <span class="product-rating-overview__rating-score">{{ book.ratings || 0 }}</span>
+            <span class="product-rating-overview__score-wrapper"> trên 5</span>
+          </div>
+          <div class="product-rating-overview__stars">
+            <div
+              class="shopee-rating-stars__stars"
+              *ngIf="book.ratings >= 1"
+            >
+              <ng-container *ngFor="let rating of getStarArray(book.ratings)">
+                <i class="fa-solid fa-star shopee-rating-stars__primary-star"></i>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="product-rating-overview__filters">
+          <ng-container *ngFor="let item of rattingType">
+            <div
+              class="product-rating-overview__filter"
+              (click)="handleClick(item.value)"
+              [ngClass]="{ 'product-rating-overview__filter--active': item.selected }"
+            >
+              {{ item.value }} <span *ngIf="item.value !== 'Tất cả'"> Sao </span>
+              <ng-container *ngIf="item.value !== 'Tất cả'">
+                ({{ getRatingsCountForStars(item.value) | number: '1.0-1' }})
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div
+        class=""
+        *ngFor="let item of book.reviews"
+      >
+        <div class="shopee-product-rating">
+          <a class="shopee-product-rating__avatar">
+            <div class="shopee-avatar">
+              <img
+                src="{{ item.user.avatar.url }}"
+                alt=""
+                class="shopee-avatar__img"
+              />
+            </div>
+          </a>
+          <div class="shopee-product-rating__main">
+            <a class="shopee-product-rating__author-name">{{ item.user.lastName + ' ' + item.user.firstName }}</a>
+            <div class="repeat-purchase-con">
+              <div class="shopee-product-rating__rating">
+                <ng-container *ngFor="let rating of getStarArray(item.rating)">
+                  <i class="fa-solid fa-star shopee-svg-icon icon-rating-solid"></i>
+                </ng-container>
+              </div>
+            </div>
+            <div class="shopee-product-rating__time">{{ formatDate(item.createdAt) }}</div>
+            <div class="Rk6V+3">
+              <div class="mt-[0.75rem]">{{ item.comment }}</div>
+            </div>
+            <div class="flex justify-end">
+              <span
+                class="shopee-product-rating__report-menu-dropdown"
+                (click)="handleReport(item.bookId, item.user._id, item.comment)"
+                >Báo cáo</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex items-center justify-center gap-3 mt-3"
+        *ngIf="book.reviews.length > 0"
+      >
+        <button
+          class="p-2 bg-gray-200 w-[160px] rounded-sm h-[40px]"
+          (click)="handlePageChange(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          [style.opacity]="currentPage === 1 ? 0.5 : 1"
+        >
+          Trang trước
+        </button>
+        <div>Trang {{ currentPage }} / {{ totalPage }}</div>
+        <button
+          class="p-2 bg-gray-200 w-[160px] rounded-sm h-[40px]"
+          (click)="handlePageChange(currentPage + 1)"
+          [disabled]="currentPage === totalPage"
+          [style.opacity]="currentPage === totalPage ? 0.5 : 1"
+        >
+          Trang kế tiếp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="container mx-auto my-8 w-[1440px]"
+  *ngIf="isLoading"
+>
+  Loading...
+</div>

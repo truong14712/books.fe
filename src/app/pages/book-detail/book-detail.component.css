@@ -1,0 +1,266 @@
+.ite_txt_right {
+  color: #0d0e0f;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 15px;
+  overflow: hidden;
+  line-height: 1.4;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  height: calc(15px * 1 * 1.4);
+  display: -webkit-box;
+  max-width: 200px;
+}
+
+.evt_cart_2_slide_ite_last {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #c92127;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  flex: 1;
+  width: 104px;
+  height: 109px;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  margin-left: 10px;
+}
+
+.evt_cart_2_view_more {
+  font-size: 1.3em;
+  font-weight: 700;
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  margin-bottom: 4px;
+  background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/event_cart_2/ico-nextslider.svg) no-repeat center center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+.product-ratings {
+  border-radius: 0.125rem;
+  overflow: hidden;
+  background: #fff;
+  margin-top: 0.9375rem;
+  padding: 1.5625rem;
+  overflow: visible;
+}
+
+.product-rating-overview {
+  background-color: #fffbf8;
+  min-height: 5rem;
+  border: 1px solid #f9ede5;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  padding: 1.875rem;
+}
+
+.product-rating-overview__briefing {
+  text-align: center;
+  margin-right: 1.875rem;
+}
+
+.product-rating-overview__filters {
+  flex: 1;
+  margin-left: 0.9375rem;
+}
+
+.product-rating-overview__score-wrapper {
+  color: #ee4d2d;
+  font-size: 1.125rem;
+}
+
+.product-rating-overview__stars {
+  font-size: 1.25rem;
+  margin-top: 0.625rem;
+}
+
+.product-rating-overview__rating-score {
+  font-size: 1.875rem;
+}
+
+.product-rating-overview__score-wrapper {
+  color: #ee4d2d;
+  font-size: 1.125rem;
+}
+
+.shopee-rating-stars__stars {
+  display: flex;
+}
+
+.shopee-rating-stars__primary-star {
+  color: #ee4d2d;
+  stroke: #ee4d2d;
+  display: block;
+  left: 0;
+  overflow-x: hidden;
+  width: 1em;
+  height: 1em;
+}
+
+.product-rating-overview__filter--active {
+  border-color: #ee4d2d !important;
+  fill: #ee4d2d !important;
+  color: #ee4d2d !important;
+}
+
+.product-rating-overview__filter {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  height: 2rem;
+  line-height: 2rem;
+  min-width: 8.25rem;
+  text-align: center;
+  padding: 0 0.625rem;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 0.5rem;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  text-transform: capitalize;
+  border-radius: 4px;
+  margin-bottom: 0.3125rem;
+  margin-top: 0.3125rem;
+}
+
+.all {
+  cursor: pointer;
+  -moz-user-select: none;
+  user-select: none;
+  height: 2rem;
+  line-height: 2rem;
+  min-width: 8.25rem;
+  text-align: center;
+  padding: 0 0.625rem;
+  color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 0.5rem;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  text-transform: capitalize;
+  margin-bottom: 0.3125rem;
+}
+
+.shopee-product-rating:first-child {
+  padding-top: 0;
+}
+
+.shopee-product-rating__avatar {
+  width: 2.5rem;
+  margin-right: 0.625rem;
+  text-align: center;
+}
+
+.shopee-product-rating__avatar .shopee-avatar {
+  border: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.shopee-product-rating {
+  border-bottom: 1px dashed rgb(209 213 219 /1);
+  display: flex;
+  padding: 1rem 0 1rem 1.25rem;
+  align-items: flex-start;
+}
+
+.shopee-product-rating__main {
+  flex: 1;
+}
+
+.shopee-avatar__img {
+  border-radius: 50%;
+}
+
+.shopee-product-rating__author-name {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 0.75rem;
+}
+
+.shopee-product-rating__main .repeat-purchase-con {
+  display: flex;
+}
+
+.shopee-product-rating__rating {
+  margin-top: 0.375rem;
+}
+
+.shopee-svg-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  position: relative;
+}
+
+.shopee-product-rating__rating .icon-rating-solid {
+  margin-right: 0.125rem;
+  color: #ee4d2d;
+}
+
+.shopee-product-rating__time {
+  margin-top: 0.25rem;
+  margin-bottom: 0.9375rem;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.Rk6V\+3 {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0.9375rem 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgba(0, 0, 0, 0.87);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+._046PXf {
+  color: #ee4d2d !important;
+  border-bottom-color: #ee4d2d !important;
+  border-bottom: 1px solid #555;
+  margin-right: 8px;
+}
+
+
+.nTpKes {
+  padding: 4px 0;
+  font-size: .875rem;
+  color: #767676;
+  text-transform: capitalize;
+  margin-right: 5px;
+}
+
+.shopee-product-rating__report-menu-dropdown {
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, .09);
+  padding: 0.75rem 1.625rem;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .05);
+  color: rgba(0, 0, 0, .8);
+  text-transform: capitalize;
+  white-space: nowrap;
+  cursor: pointer;
+}
