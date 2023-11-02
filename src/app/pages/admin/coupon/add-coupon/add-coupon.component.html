@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="container mx-auto mb-4">
   <h1 class="text-center">Thêm Mã Giảm Giá</h1>
   <form
     [formGroup]="myForm"
@@ -54,7 +54,6 @@
         matIconSuffix
         [for]="picker"
       >
-        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="myForm.hasError('required', 'expirationDate')">
@@ -120,7 +119,7 @@
       class="my-4 submit-button"
       [disabled]="!myForm.valid"
     >
-      Thêm Mã Giảm Giá Ngay
+      Đồng ý
     </button>
   </form>
 </div>

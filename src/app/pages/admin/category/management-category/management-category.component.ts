@@ -47,11 +47,16 @@ export class ManagementCategoryComponent implements OnInit {
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
           this.ngOnInit();
         },
-        (error) => {
-          console.error(error);
+        ({ error }) => {
+          this._snackBar.open(`${error.message}`, 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 2000,
+          });
         },
       );
     }

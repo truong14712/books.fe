@@ -1,11 +1,12 @@
+import * as moment from 'moment';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Coupon } from '@core/interfaces/coupon';
 import { CouponService } from '@core/services/coupon/coupon.service';
-import * as moment from 'moment';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-management-coupon',
   templateUrl: './management-coupon.component.html',
@@ -22,6 +23,7 @@ export class ManagementCouponComponent implements OnInit {
   constructor(
     private coupon: CouponService,
     private _snackBar: MatSnackBar,
+    private _liveAnnouncer: LiveAnnouncer,
   ) {}
 
   ngOnInit() {
@@ -33,18 +35,35 @@ export class ManagementCouponComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
+
   formattedDate(date: Date) {
     return moment(date).format('DD/MM/YYYY');
   }
   onDelete(id: string) {
     if (window.confirm('Are you sure you want to delete this coupon?')) {
-      this.coupon.deleteCoupon(id).subscribe((data) => {
-        this._snackBar.open(`${data.message}`, 'OK', {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
-        this.ngOnInit();
-      });
+      this.coupon.deleteCoupon(id).subscribe(
+        (data) => {
+          this._snackBar.open(`${data.message}`, 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          });
+          this.ngOnInit();
+        },
+        ({ error }) => {
+          this._snackBar.open(`${error.message}`, 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 2000,
+          });
+        },
+      );
+    }
+  }
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
     }
   }
 }

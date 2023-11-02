@@ -1,4 +1,4 @@
-<div class="container mx-auto w-[1440px]">
+<div class="container mx-auto w-[1440px] mb-5">
   <div>
     <button
       mat-raised-button
@@ -13,6 +13,7 @@
       mat-table
       matSort
       [dataSource]="dataSource"
+      (matSortChange)="announceSortChange($event)"
     >
       <tbody>
         <ng-container matColumnDef="_id">
@@ -21,7 +22,7 @@
             *matHeaderCellDef
             mat-sort-header
           >
-            Vị trí
+            Thứ tự
           </th>
           <td
             mat-cell
@@ -36,6 +37,7 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
+            sortActionDescription="Sort by name"
           >
             Tên Sách
           </th>
@@ -51,6 +53,7 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
+            sortActionDescription="Sort by name"
           >
             Tác Giả
           </th>
@@ -66,6 +69,7 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
+            sortActionDescription="Sort by name"
           >
             Giá Gốc
           </th>
@@ -73,7 +77,7 @@
             mat-cell
             *matCellDef="let element"
           >
-            {{ element.price }}
+            ₫{{ element.price.toLocaleString('vi-VN') }}
           </td>
         </ng-container>
 
@@ -82,6 +86,7 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
+            sortActionDescription="Sort by name"
           >
             Giá Khuyến Mãi
           </th>
@@ -89,7 +94,7 @@
             mat-cell
             *matCellDef="let element"
           >
-            {{ element.discountPrice }}
+            ₫{{ element.discountPrice.toLocaleString('vi-VN') }}
           </td>
         </ng-container>
 
@@ -107,14 +112,7 @@
             <a routerLink="/admin/book/update/{{ element._id }}">
               <button class="p-3 mx-1 hover:text-blue-600"><i class="fa-regular fa-pen-to-square"></i></button
             ></a>
-            <a>
-              <button
-                class="p-3 mx-2 hover:text-pink-400"
-                (click)="openModelUpdateBookHightLightComponent(element._id)"
-              >
-                <i class="fa-solid fa-marker"></i>
-              </button>
-            </a>
+
             <button
               class="p-3 mx-1 hover:text-red-500"
               (click)="deleteBook(element._id)"

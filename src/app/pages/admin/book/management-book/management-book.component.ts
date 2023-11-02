@@ -1,14 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { ModelUpdateBookHightLightComponent } from '@core/components/admin/model-update-book-hight-light/model-update-book-hight-light.component';
 import { Book } from '@core/interfaces/book';
 import { BookService } from '@core/services/book/book.service';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-management-book',
   templateUrl: './management-book.component.html',
@@ -25,7 +22,7 @@ export class ManagementBookComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private book: BookService,
-    private dialog: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer,
   ) {}
 
   ngOnInit() {
@@ -40,18 +37,35 @@ export class ManagementBookComponent implements OnInit {
 
   deleteBook(id: string) {
     if (window.confirm('Are you sure you want to delete this book?')) {
-      this.book.deleteBook(id).subscribe((data) => {
-        this._snackBar.open(`${data.message}`, 'OK', {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
-        this.ngOnInit();
-      });
+      this.book.deleteBook(id).subscribe(
+        (data) => {
+          this._snackBar.open(`${data.message}`, 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 2000,
+          });
+          this.ngOnInit();
+        },
+        ({ error }) => {
+          this._snackBar.open(`${error.message}`, 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 2000,
+          });
+        },
+      );
     }
   }
-  openModelUpdateBookHightLightComponent(id: string) {
-    this.dialog.open(ModelUpdateBookHightLightComponent, {
-      data: { id },
-    });
+
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }

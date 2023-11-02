@@ -55,6 +55,7 @@ export class UpdateBookComponent implements OnInit {
           weight: this.newBook.weight,
           brand: this.newBook.brand,
           stock: this.newBook.stock,
+          isHighlighted: this.newBook.isHighlighted,
           selectedCoverType: this.newBook.coverType,
           selectedCategoryId: this.newBook.categoryId._id,
           selectedLanguage: this.newBook.language,
@@ -80,6 +81,7 @@ export class UpdateBookComponent implements OnInit {
     weight: [0, [Validators.required]],
     brand: ['', Validators.required],
     stock: [0, [Validators.required]],
+    isHighlighted: [false, Validators.required],
     selectedLanguage: [this.language, Validators.required],
     selectedCoverType: [this.coverType, Validators.required],
     selectedCategoryId: [this.categoryId, Validators.required],
@@ -131,6 +133,7 @@ export class UpdateBookComponent implements OnInit {
         formData.append('nameBook', formValue.nameBook);
         formData.append('weight', formValue.weight);
         formData.append('stock', formValue.stock);
+        formData.append('isHighlighted', formValue.isHighlighted);
         formData.append('brand', formValue.brand);
         if (this.categoryId) {
           formData.append('categoryId', this.categoryId);

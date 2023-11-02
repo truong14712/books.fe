@@ -45,7 +45,7 @@ export class UpdateCouponComponent implements OnInit {
     });
   }
   onSubmit() {
-    const data = {
+    const data: any = {
       code: this.myForm.value.code || '',
       discount: this.myForm.value.discount || 0,
       expirationDate: moment(this.myForm.value.expirationDate).format('MM-DD-YYYY') || '',

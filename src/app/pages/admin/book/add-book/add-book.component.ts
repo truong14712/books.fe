@@ -39,6 +39,7 @@ export class AddBookComponent implements OnInit {
     weight: [0, [Validators.required]],
     brand: ['', Validators.required],
     stock: [0, [Validators.required]],
+    isHighlighted: ['', Validators.required],
     selectedLanguage: [this.language, Validators.required],
     selectedCoverType: [this.coverType, Validators.required],
     selectedCategoryId: [this.categoryId, Validators.required],
@@ -52,15 +53,10 @@ export class AddBookComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.category.getAllCategory().subscribe(
-      (data) => {
-        const { docs } = data.data;
-        this.listCategory = docs;
-      },
-      (error) => {
-        console.error(error);
-      },
-    );
+    this.category.getAllCategory().subscribe((data) => {
+      const { docs } = data.data;
+      this.listCategory = docs;
+    });
   }
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -98,6 +94,7 @@ export class AddBookComponent implements OnInit {
       formData.append('weight', formValue.weight);
       formData.append('stock', formValue.stock);
       formData.append('brand', formValue.brand);
+      formData.append('isHighlighted', formValue.isHighlighted);
       formData.append('categoryId', this.categoryId);
       this.images.forEach((file: File) => {
         formData.append('images', file);

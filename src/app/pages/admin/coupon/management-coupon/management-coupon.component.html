@@ -1,4 +1,4 @@
-<div class="container mx-auto w-[1440px]">
+<div class="container mx-auto w-[1440px] mb-5">
   <div>
     <button
       mat-raised-button
@@ -13,6 +13,8 @@
       mat-table
       matSort
       [dataSource]="dataSource"
+      (matSortChange)="announceSortChange($event)"
+
     >
       <tbody>
         <ng-container matColumnDef="_id">
@@ -21,7 +23,7 @@
             *matHeaderCellDef
             mat-sort-header
           >
-            Vị Trí
+            Thứ tự
           </th>
           <td
             mat-cell

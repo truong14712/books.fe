@@ -1,4 +1,4 @@
-<div class="container mx-auto w-[1080px]">
+<div class="container mx-auto w-[1080px] mb-4">
   <h1 class="text-center">Cập Nhật Sách</h1>
   <form
     [formGroup]="myForm"
@@ -212,6 +212,23 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Nổi bật</mat-label>
+      <mat-select
+        formControlName="isHighlighted"
+        required="true"
+      >
+        <mat-option value="true">Bật</mat-option>
+        <mat-option value="false">Tắt</mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'isHighlighted')">
+        Kích Thước <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
     <mat-form-field class="form-field">
       <mat-label>Ngôn Ngữ</mat-label>
       <mat-select
@@ -291,7 +308,7 @@
       class="submit-button"
       [disabled]="!myForm.valid"
     >
-      Cập Nhật Sách Ngay
+      Đồng ý
     </button>
   </form>
 </div>
