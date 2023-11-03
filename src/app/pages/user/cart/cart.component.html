@@ -1,0 +1,201 @@
+<div class="container mx-auto w-[1440px]">
+  <div class="p-2 my-4 text-xl font-medium text-blue-700 uppercase">Giỏ hàng</div>
+  <div
+    class="flex h-[55px] text-sm mb-3 px-20 rounded items-center bg-white text-[#888] border shadow-md"
+    *ngIf="listCart.length > 0"
+  >
+    <div class="flex min-w-[58px] px-5 items-center flex-row-reverse">
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="selectAllChecked"
+          (change)="toggleSelectAll()"
+          class="w-4 h-4 accent-[#ee4d2d] md:accent-red-500 border-[#ee4d2d] shadow-sm"
+        />
+      </label>
+    </div>
+    <div class="flex items-center w-[47%] text-center">Sản phẩm</div>
+    <div class="flex items-center w-[16%] text-center">Đơn giá</div>
+    <div class="flex items-center w-[16%] text-center">Số lượng</div>
+    <div class="flex items-center w-[13%] text-center">Thành tiến</div>
+    <div class="flex items-center w-[13%] text-center">Thao tác</div>
+  </div>
+  <section class="">
+    <div
+      class="pt-4 mt-4"
+      *ngFor="let book of listCart; let i = index"
+    >
+      <!-- Cart items -->
+      <div class="flex items-center px-20 mb-3 text-sm bg-white">
+        <div class="min-w-[55px] flex items-center px-5 flex-row-reverse">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="book.selected"
+              (ngModelChange)="handleCheckboxChange(book)"
+              (change)="handleCheckboxSelection(book._id, $event)"
+              class="w-4 h-4 accent-[#ee4d2d] md:accent-red-500 border-[#ee4d2d] shadow-sm"
+            />
+          </label>
+        </div>
+        <div class="flex items-center w-[36%] py-2">
+          <a routerLink="/book-detail/{{ book.slug }}/{{ book._id }}">
+            <img
+              src="{{ book.images[3].url }}"
+              alt=""
+              class="w-[80px] h-[80px] object-cover"
+            />
+          </a>
+          <div class="flex flex-col pt-1 pl-2 pr-5">
+            <a
+              routerLink="/book-detail/{{ book.slug }}/{{ book._id }}"
+              class="mb-1 max-h-[32px] text-ellipsis"
+            >
+              {{ book.nameBook }}</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center w-[16%] justify-center flex-col">
+          <div>
+            <span
+              class="  {{
+                book.discountPrice === 0
+                  ? 'text-sm text-[rgba(0,0,0,.87)]'
+                  : 'ml-2 text-sm font-light line-through text-[rgba(0,0,0,.54)]'
+              }}"
+              >₫{{ book.price.toLocaleString('de-DE') }}</span
+            >
+            <span
+              class="mx-2 text-sm text-[rgba(0,0,0,.87)]"
+              *ngIf="book.discountPrice !== 0"
+              >₫{{ book.discountPrice.toLocaleString('de-DE') }}</span
+            >
+          </div>
+          <div
+            class="mt-1 text-xs"
+            *ngIf="book.discountPrice !== 0"
+          >
+            <span class="text-[#ee4d2d]"
+              >Giảm giá {{ roundPercentage(((book.price - book.discountPrice) / book.price) * 100) }}%</span
+            >
+            <span class="ml-1 px-1 bg-[#ee4d2d] text-white py-[1px]">Đã cập nhật</span>
+          </div>
+        </div>
+        <div class="flex items-center w-[18%] justify-center">
+          <button
+            class="w-[32px] h-[32px] rounded-sm flex items-center justify-center font-light outline-none border text-[.875rem]"
+            (click)="decreaseQuantity(book._id)"
+          >
+            <i class="text-xs fa-solid fa-minus w-[10px] h-[10px] flex-shrink-0"></i>
+          </button>
+          <input
+            type="text"
+            class="w-[50px] h-[32px] border-l-0 border-r-0 text-base text-center rounded-none font-normal p-0 border outline-0"
+            [(ngModel)]="book.quantity"
+            (keydown)="handleInput($event)"
+            (input)="handleInputChange($event, i)"
+            (blur)="inputBlur($event, i)"
+          />
+          <button
+            class="w-[32px] h-[32px] rounded-sm flex items-center justify-center font-light outline-none border text-[.875rem"
+            (click)="increaseQuantity(book._id)"
+          >
+            <i class="fa-solid fa-plus w-[10px] h-[10px] flex-shrink-0"></i>
+          </button>
+        </div>
+        <div class="flex items-center justify-center text-[#ee4d2d] w-[11%]">
+          <span *ngIf="book.discountPrice !== 0"
+            >₫{{ (book.quantity * book.discountPrice).toLocaleString('de-DE') }}</span
+          >
+          <span *ngIf="book.discountPrice === 0">₫{{ (book.quantity * book.price).toLocaleString('de-DE') }}</span>
+        </div>
+        <div class="flex items-center justify-center w-[12%] text-base">
+          <button
+            class="p-[10px] border-0 hover:text-[#ee4d2d]"
+            (click)="handleDeleteBook(book._id)"
+          >
+            Xóa
+          </button>
+        </div>
+      </div>
+      <div class="mb-4 border border-gray-100 border-solid"></div>
+      <!-- End cart items -->
+    </div>
+    <div
+      class="flex items-center justify-center gap-3 mt-3"
+      *ngIf="listCart.length > 0"
+    >
+      <button
+        class="p-2 bg-gray-200 w-[160px] rounded-sm h-[40px]"
+        (click)="handlePageChange(currentPage - 1)"
+        [disabled]="currentPage === 1"
+        [style.opacity]="currentPage === 1 ? 0.5 : 1"
+      >
+        Trang trước
+      </button>
+      <div>Trang {{ currentPage }} / {{ totalPage }}</div>
+      <button
+        class="p-2 bg-gray-200 w-[160px] rounded-sm h-[40px]"
+        (click)="handlePageChange(currentPage + 1)"
+        [disabled]="currentPage === totalPage"
+        [style.opacity]="currentPage === totalPage ? 0.5 : 1"
+      >
+        Trang kế tiếp
+      </button>
+    </div>
+  </section>
+  <section *ngIf="listCart.length > 0">
+    <div class="flex items-center justify-end w-full col-start-1 col-end-4 px-2 py-3 text-base">
+      <div class="flex flex-row-reverse pl-5 pr-3 min-w-[58px] items-center">
+        <label
+          for=""
+          class="flex items-center max-w-[400px] cursor-default text-xs"
+        >
+          <input
+            type="checkbox"
+            class="w-4 h-4 accent-[#ee4d2d] md:accent-red-500 border-[#ee4d2d] shadow-sm"
+            (change)="toggleSelectAll()"
+            [(ngModel)]="selectAllChecked"
+          />
+        </label>
+      </div>
+      <button
+        class="px-[6px] py-[1px] w-[12%]"
+        (click)="selectAll()"
+      >
+        Chọn tất cả
+      </button>
+      <button
+        class="mx-2 px-[6px] py-2"
+        (click)="clearCart()"
+      >
+        Xóa
+      </button>
+      <div class="flex items-center ml-5 w-[335px]">
+        <div class="">Tổng thanh toán</div>
+        <div class="ml-4 text-2xl text-red-600">
+          <span class="text-sm">đ </span>{{ totalPrice.toLocaleString('de-DE') }}
+        </div>
+      </div>
+      <button
+        class="px-[36px] text-lg font-light capitalize rounded-[4px] py-[13px] ml-4 mr-[20px] h-[2.5rem] bg-red-600 text-white flex items-center hover:bg-red-500"
+        (click)="handleCheckout()"
+      >
+        <span>Mua hàng</span>
+      </button>
+    </div>
+  </section>
+</div>
+<div
+  class="container mx-auto w-[1440px] flex flex-col items-center justify-center text-center"
+  *ngIf="listCart.length === 0"
+>
+  <div class="p-2 my-4 text-xl text-center">Chưa có sản phẩm trong giỏ hàng của bạn</div>
+  <a routerLink="/">
+    <button
+      class="w-[220px] h-[40px] cursor-pointer bg-blue-600 text-white font-medium text-base uppercase px-[10px] border rounded-lg shadow-sm"
+    >
+      Mua sắm ngay
+    </button>
+  </a>
+</div>
