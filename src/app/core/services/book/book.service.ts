@@ -34,9 +34,6 @@ export class BookService {
   updateBook(book: Book, id: string): Observable<any> {
     return this.http.put(`${this.API_URL}/book/${id}`, book);
   }
-  updateBookIsHighlighted(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.API_URL}/book/${id}`, data);
-  }
   deleteBook(id: string): Observable<any> {
     return this.http.delete(`${this.API_URL}/book/${id}`);
   }
@@ -71,7 +68,12 @@ export class BookService {
     // sort price and order descend ascend
     const [_sort, _order] = query.split('-');
     const params = new HttpParams().set('_sort', _sort).set('_order', _order);
-
     return this.http.get(`${this.API_URL}/book`, { params });
+  }
+  createNewReview(data: any) {
+    return this.http.patch(`${this.API_URL}/book/createNewReview`, data);
+  }
+  searchProductReviewsAllUsers(data: any) {
+    return this.http.post(`${this.API_URL}/book/searchProductReviewsAllUsers`, data);
   }
 }
