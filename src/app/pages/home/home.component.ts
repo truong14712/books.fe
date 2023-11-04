@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private cart: CartService,
     private auth: AuthService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -76,11 +77,17 @@ export class HomeComponent implements OnInit {
     const ascend = 'ascend';
     const descend = 'descend';
     if (option === 'Giá: Thấp đến Cao') {
+      this.router.navigate(['/'], {
+        queryParams: { _sort, order: ascend },
+      });
       this.book.sortBookPriceLatest(`${_sort}-${ascend}`).subscribe(({ data }: any) => {
         this.listBook = data.docs;
         this.totalPage = Math.ceil(this.listBook.length / this.itemsPerPage);
       });
     } else {
+      this.router.navigate(['/'], {
+        queryParams: { _sort, order: descend },
+      });
       this.book.sortBookLatest(`${_sort}-${descend}`).subscribe(({ data }: any) => {
         this.listBook = data.docs;
         this.totalPage = Math.ceil(this.listBook.length / this.itemsPerPage);
@@ -92,6 +99,9 @@ export class HomeComponent implements OnInit {
     this.isBookLatest = true;
     const _sort = 'createdAt';
     const descend = 'descend';
+    this.router.navigate(['/'], {
+      queryParams: { _sort, order: descend },
+    });
     this.book.sortBookLatest(`${_sort}-${descend}`).subscribe(({ data }: any) => {
       this.listBook = data.docs;
       this.totalPage = Math.ceil(this.listBook.length / this.itemsPerPage);
