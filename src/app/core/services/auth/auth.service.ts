@@ -44,7 +44,9 @@ export class AuthService {
     localStorage.clear();
     return this.http.get(`${this.API_URL}/auth/logout`);
   }
-
+  getOne(id: any): Observable<any> {
+    return this.http.get(`${this.API_URL}/auth/${id}`);
+  }
   changeInformation(data: changeInformation) {
     return this.http.put(`${this.API_URL}/auth/changeInformation`, data);
   }
@@ -80,16 +82,47 @@ export class AuthService {
     const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(user), this.secretKey).toString();
     localStorage.setItem('user', encryptedUser);
   }
+
   refreshToken(data: any) {
     return this.http.post(`${this.API_URL}/auth/refreshToken`, data);
   }
+
   addAddress(data: Addresses) {
     return this.http.patch(`${this.API_URL}/auth/addAddress`, data);
+  }
+  updateAddress(data: any) {
+    return this.http.patch(`${this.API_URL}/auth/updateAddress`, data);
   }
   changeAddressStatus(data: { addressId: string; status: boolean }) {
     return this.http.patch(`${this.API_URL}/auth/changeAddressStatus`, data);
   }
+
   deleteAddress(id: string) {
     return this.http.delete(`${this.API_URL}/auth/deleteAddress/${id}`);
+  }
+
+  getAllUser() {
+    return this.http.get(`${this.API_URL}/auth/`);
+  }
+
+  getOneUser(id: string) {
+    return this.http.get(`${this.API_URL}/auth/${id}`);
+  }
+
+  deleteUser(id: string) {
+    return this.http.delete(`${this.API_URL}/auth/${id}`);
+  }
+
+  forgotPassword(body: any) {
+    return this.http.post(`${this.API_URL}/auth/forgotPassword`, body);
+  }
+  resetPassword(id: string, data: any) {
+    return this.http.patch(`${this.API_URL}/auth/resetPassword/${id}`, data);
+  }
+  loginSuccessGoogle(data: any) {
+    return this.http.post(`${this.API_URL}/auth/login-success-google`, data);
+  }
+  loginSuccessFacebook(data: any) {
+    return this.http.post(`${this.API_URL}/auth/login-success-facebook`, data);
   }
 }
