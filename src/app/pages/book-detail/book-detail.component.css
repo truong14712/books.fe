@@ -42,7 +42,8 @@
   height: 32px;
   color: #fff;
   margin-bottom: 4px;
-  background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/event_cart_2/ico-nextslider.svg) no-repeat center center;
+  background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/event_cart_2/ico-nextslider.svg)
+    no-repeat center center;
   -webkit-background-size: contain;
   -moz-background-size: contain;
   -o-background-size: contain;
@@ -245,10 +246,9 @@
   margin-right: 8px;
 }
 
-
 .nTpKes {
   padding: 4px 0;
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: #767676;
   text-transform: capitalize;
   margin-right: 5px;
@@ -256,10 +256,10 @@
 
 .shopee-product-rating__report-menu-dropdown {
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, .09);
+  border: 1px solid rgba(0, 0, 0, 0.09);
   padding: 0.75rem 1.625rem;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .05);
-  color: rgba(0, 0, 0, .8);
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.8);
   text-transform: capitalize;
   white-space: nowrap;
   cursor: pointer;
