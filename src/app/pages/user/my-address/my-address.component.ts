@@ -19,7 +19,15 @@ export class MyAddressComponent implements OnInit {
   ngOnInit() {
     this.user = this.auth.isAuthenticated();
   }
-  removeAddress(id: string) {
+  removeAddress(id: string, status: boolean) {
+    if (status === true) {
+      this._snackBar.open('Bạn không thể Xóa địa chỉ mặc định', 'OK', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+      return;
+    }
     if (window.confirm('Are you sure you want to remove this address)')) {
       this.auth.deleteAddress(id).subscribe(
         (data: any) => {
@@ -27,6 +35,7 @@ export class MyAddressComponent implements OnInit {
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
           this.ngOnInit();
         },
@@ -34,9 +43,25 @@ export class MyAddressComponent implements OnInit {
           this._snackBar.open(`${error.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
         },
       );
     }
+  }
+  handleStatusAddress(user: any) {
+    const data = {
+      addressId: user._id as string,
+      status: true,
+    };
+    this.auth.changeAddressStatus(data).subscribe((res: any) => {
+      this._snackBar.open('Cập nhật địa chỉ mặc định thành công', 'OK', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+      this.auth.setUser(res.data);
+      this.ngOnInit();
+    });
   }
 }
