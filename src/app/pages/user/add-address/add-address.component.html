@@ -80,7 +80,16 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div>
+    <div class="flex items-center justify-center">
+      <a routerLink="/user/profile/myAddress">
+        <button
+          mat-raised-button
+          type="submit"
+          class="mx-2 submit-button"
+        >
+          Trở lại
+        </button>
+      </a>
       <button
         mat-raised-button
         color="primary"
@@ -88,7 +97,7 @@
         class="mx-2 submit-button"
         [disabled]="!myForm.valid"
       >
-        Thêm Địa Chỉ Ngay
+        Hoàn Thành
       </button>
     </div>
   </form>
