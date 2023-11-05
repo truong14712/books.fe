@@ -32,7 +32,17 @@ export class ChangeInforMationComponent implements OnInit {
   myForm = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.maxLength(30)]],
     lastName: ['', [Validators.required, Validators.maxLength(30)]],
-    phoneNumber: [0, [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+    phoneNumber: [
+      0,
+      [
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.minLength(10),
+        Validators.pattern(
+          '^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$',
+        ),
+      ],
+    ],
   });
   onSubmit() {
     const newUser: changeInformation = {
@@ -47,12 +57,14 @@ export class ChangeInforMationComponent implements OnInit {
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
         },
         (err) => {
           this._snackBar.open(`${err.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
         },
       );
