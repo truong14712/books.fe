@@ -339,3 +339,12 @@
 .OFl2GI:hover {
   color: #ee4d2d;
 }
+
+.SbCTde {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  text-transform: capitalize;
+  color: #333;
+}
