@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth/auth.service';
 import { checkPassword } from '@core/validation/checkPassword';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { noWhitespaceValidator } from '@core/validation/noWhitespaceValidator';
 
 @Component({
   selector: 'app-change-password',
@@ -24,9 +25,12 @@ export class ChangePasswordComponent {
   ) {}
   myForm = this.formBuilder.group(
     {
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      password: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
+      newPassword: ['', [Validators.required, Validators.minLength(6), noWhitespaceValidator]],
+      confirmPassword: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(30), noWhitespaceValidator],
+      ],
     },
     {
       validator: checkPassword,
