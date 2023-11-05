@@ -1,0 +1,180 @@
+<div class="container mx-auto w-[1280px] my-6">
+  <div class="p-2 my-4 text-xl font-medium text-blue-700 uppercase">thanh toán</div>
+  <div class="vtrWey"></div>
+  <div
+    class="px-[30px] pt-[28px] pb-[24px] shadow-sm border"
+    *ngIf="addresses.length > 0"
+  >
+    <div class="flex items-center mb-5 text-lg text-blue-600">
+      <div class="mr-2">
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <div class="uppercase">địa chỉ nhận hàng</div>
+    </div>
+    <div class="flex items-center text-base break-words">
+      <div class="flex items-center">
+        <div class="text-[#222] font-medium">
+          {{ user.firstName + ' ' + user.lastName }} (+84) {{ user.phoneNumber }}
+        </div>
+        <ng-container>
+          <div
+            class="flex items-center ml-5 break-words"
+            *ngFor="let item of addresses"
+          >
+            <ng-container *ngIf="item.status === true">
+              <div>
+                {{ item.address + ' ' + item.state + ' ' + item.city + ' ' + item.country }}
+              </div>
+              <div
+                class="ml-4 px-1 py-[1px] my-[1px] text-xs capitalize border border-solid rounded-[1px] border-blue-600 text-blue-600"
+              >
+                Mặc định
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+      <button
+        class="ml-[2.5rem] text-[#4080ee] cursor-pointer capitalize"
+        (click)="openAddress()"
+      >
+        Thay đổi
+      </button>
+    </div>
+  </div>
+  <div class="mt-4 shadow-sm border rounded-[3px]">
+    <div class="flex items-center h-[50px] px-[30px] pt-6">
+      <div class="w-full h-[30px] text-sm text-[#bbb] flex items-center">
+        <div class="text-[#222] text-lg text-left flex-[5]"><div>Sản phẩm</div></div>
+        <div class="flex-[2] text-center">Đơn giá</div>
+        <div class="flex-[2] text-center">Số lượng</div>
+        <div class="flex-[2] text-right">Thành tiền</div>
+      </div>
+    </div>
+    <div>
+      <!-- book -->
+      <div
+        class="KxX-H6"
+        *ngFor="let book of listCart"
+      >
+        <div class="iyDtv7 _2OGC7L">
+          <div class="flex-[5] flex items-center">
+            <img
+              [src]="book.images[3].url"
+              alt="book image"
+              class="w-[40px] h-[40px] border-[0px]"
+            />
+            <span class="oEI3Ln">
+              <span class="gHbVhc">
+                {{ truncateString(book.nameBook, 70) }}
+              </span>
+            </span>
+          </div>
+          <div
+            class="h3ONzh"
+            *ngIf="book.discountPrice !== 0"
+          >
+            ₫{{ book.discountPrice.toLocaleString('de-DE') }}
+          </div>
+          <div
+            class="h3ONzh"
+            *ngIf="book.discountPrice === 0"
+          >
+            ₫{{ book.price.toLocaleString('de-DE') }}
+          </div>
+          <div class="h3ONzh">{{ book.quantity }}</div>
+          <div
+            class="h3ONzh"
+            *ngIf="book.discountPrice !== 0"
+          >
+            ₫{{ (book.quantity * book.discountPrice).toLocaleString('de-DE') }}
+          </div>
+          <div
+            class="h3ONzh"
+            *ngIf="book.discountPrice === 0"
+          >
+            ₫{{ (book.quantity * book.price).toLocaleString('de-DE') }}
+          </div>
+        </div>
+      </div>
+      <!-- end book -->
+      <div class="uw1QJu">
+        <div class="flex">
+          <div class="D2AHAU">
+            <div class="flex items-center text-sm h-[50px]">
+              <div class="mr-3">Voucher giảm giá</div>
+              <div class="flex items-center justify-between">
+                <input
+                  type="text"
+                  class="w-[340px] border rounded outline-0 h-[30px] mr-1"
+                  (input)="handleInput($event)"
+                />
+                <button
+                  class="mr-[35rem] px-3 py-1 hover:text-blue-600 bg-gray-100 cursor-pointer uppercase rounded-sm shadow-sm"
+                  (click)="handleVoucher()"
+                >
+                  Áp dụng
+                </button>
+              </div>
+              <button
+                class="_64JAsH"
+                (click)="openShowVoucher()"
+              >
+                Xem Voucher
+              </button>
+            </div>
+            <div class="DS2ZYY">
+              <div class="mt-5">
+                <div class="_2qsKTk">
+                  <div class="zDPGhr SzEjHI"></div>
+                  <mat-form-field class="w-[400px]">
+                    <mat-label>Phương thức thanh toán</mat-label>
+                    <mat-select
+                      [(value)]="payment"
+                      (selectionChange)="onPaymentChange()"
+                    >
+                      <mat-option
+                        *ngFor="let item of paymentMethods"
+                        value="{{ item.type }}"
+                        >{{ item.type }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="flex items-center justify-end">
+                  <div
+                    #paymentRef
+                    class="w-[400px]"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="KQyCj0">
+              <div class="Tc17Ac XIEGGF RY9Grr">Tổng tiền hàng</div>
+              <div class="Tc17Ac mCEcIy BcITa9">₫{{ totalAmount.toLocaleString('de-DE') }}</div>
+
+              <div class="Tc17Ac XIEGGF BcITa9">Phí vận chuyển</div>
+              <div class="Tc17Ac mCEcIy RY9Grr">₫ 0</div>
+
+              <div class="Tc17Ac XIEGGF n3vdfL">Tổng thanh toán:</div>
+              <div class="Tc17Ac kC0GSn mCEcIy n3vdfL">₫{{ totalAmount.toLocaleString('de-DE') }}</div>
+            </div>
+            <div class="uTFqRt">
+              <div class="k4VpYA">
+                <div class="C-NSr-">
+                  Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo điều khoản<span>Book Shop</span>
+                </div>
+              </div>
+              <button
+                class="text-white bg-[#ee4d2d] flex items-center border shadow-sm outline-0 rounded-[4px] px-[14px] py-[12px] m-1 w-[220px] justify-center hover:bg-[#f5674b]"
+                (click)="handleOder()"
+              >
+                Đặt hàng
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
