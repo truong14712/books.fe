@@ -63,11 +63,16 @@ export class RegisterComponent {
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
         },
 
-        (err) => {
-          console.log(err);
+        ({ error }) => {
+          this._snackBar.open(`${error.message}`, 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+            duration: 2000,
+          });
         },
       );
     }

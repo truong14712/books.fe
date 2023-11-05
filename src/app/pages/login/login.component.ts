@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from '@core/interfaces/user';
+import { environment } from 'src/app/environments/environment.development';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +15,7 @@ export class LoginComponent {
   hideOne = true;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private API_URL: string = environment.apiUrl;
   constructor(
     private auth: AuthService,
     private formBuilder: FormBuilder,
@@ -42,6 +44,7 @@ export class LoginComponent {
           this._snackBar.open(`${data.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
           const { user, accessToken } = data.data;
           this.auth.setUser(user);
@@ -52,9 +55,16 @@ export class LoginComponent {
           this._snackBar.open(`${err.error.message}`, 'OK', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 2000,
           });
         },
       );
     }
+  }
+  signInWithGoogle() {
+    window.open(`${this.API_URL}/auth/google`, '_self');
+  }
+  signInWithFacebook() {
+    window.open(`${this.API_URL}/auth/facebook`, '_self');
   }
 }

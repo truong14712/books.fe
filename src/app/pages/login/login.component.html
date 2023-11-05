@@ -1,4 +1,4 @@
-<div class="container mx-auto w-[1080px]">
+<div class="container mx-auto w-[800px]">
   <div class="mt-[2rem] text-center text-[2rem]">Đăng Nhập</div>
   <form
     [formGroup]="myForm"
@@ -57,7 +57,46 @@
       class="submit-button"
       [disabled]="!myForm.valid"
     >
-      Đăng Nhập Ngay
+      Đăng Nhập
     </button>
   </form>
+  <div class="tRiWov">
+    <a
+      class="anLGcx"
+      routerLink="/buyer/reset"
+      >Quên mật khẩu</a
+    >
+    <a
+      class="anLGcx"
+      routerLink="/buyer/register"
+      >Đăng ký</a
+    >
+  </div>
+  <div class="_6yKazv">
+    <div class="lhhucE">
+      <div class="lreZhl"></div>
+      <span class="PqS8vj">Hoặc</span>
+      <div class="lreZhl"></div>
+    </div>
+    <div class="flex items-center justify-center mt-1">
+      <button
+        class="nGTAZw lyJbNT bQ2eCN"
+        (click)="signInWithFacebook()"
+      >
+        <div class="Bq4Bra">
+          <div class="_1a550J social-white-background social-white-fb-blue-png"></div>
+        </div>
+        <div>Facebook</div>
+      </button>
+      <button
+        class="nGTAZw lyJbNT bQ2eCN"
+        (click)="signInWithGoogle()"
+      >
+        <div class="Bq4Bra">
+          <div class="_1a550J social-white-background social-white-google-png"></div>
+        </div>
+        <div>Google</div>
+      </button>
+    </div>
+  </div>
 </div>
