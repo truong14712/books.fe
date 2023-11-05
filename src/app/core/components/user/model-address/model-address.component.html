@@ -1,0 +1,43 @@
+<div class="container mx-auto w-[1024px]">
+  <div class="p-4 mt-2 text-xl text-blue-600 uppercase">Cập nhật địa chỉ</div>
+  <div mat-dialog-content>
+    <mat-list
+      role="list"
+      *ngFor="let item of user.addresses"
+    >
+      <div class="flex items-center text-base break-words">
+        <div>
+          <span>
+            {{ item.address }}
+          </span>
+          <span>
+            {{ item.state }}
+          </span>
+          <span class="mx-[2px]">
+            {{ item.city }}
+          </span>
+          <span>{{ item.country }}</span>
+          <span
+            class="ml-4 px-1 py-[1px] my-[1px] text-xs capitalize border border-solid rounded-[1px] border-blue-600 text-blue-600"
+          >
+            {{ item.addressType }}
+          </span>
+        </div>
+        <button
+          class="p-2 ml-10 hover:text-blue-500"
+          (click)="selectAddress(item)"
+        >
+          Chọn
+        </button>
+      </div>
+    </mat-list>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      mat-dialog-close
+    >
+      Đóng
+    </button>
+  </div>
+</div>
