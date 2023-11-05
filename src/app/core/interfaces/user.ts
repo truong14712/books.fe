@@ -26,6 +26,7 @@ export interface changeInformation {
 }
 
 export interface Addresses {
+  _id?: string;
   address: string;
   addressType: string;
   city: string;
