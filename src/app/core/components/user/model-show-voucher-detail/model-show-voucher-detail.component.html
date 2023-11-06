@@ -1,0 +1,37 @@
+<div class="container mx-auto w-[680px]">
+  <div
+    mat-dialog-content
+    class="scrollable-container"
+    *ngIf="!loading"
+  >
+    <div class="grid grid-cols-2 gap-4 my-3 text-sm shadow-md scrollable-item">
+      <div class="">
+        <img
+          src="https://static.kinhtedothi.vn/w960/images/upload/2022/09/26/24bbd999-ff5d-4293-ab90-19e75a0ea6c9.png"
+          alt=""
+          class="h-full w-[150px] p-2"
+        />
+      </div>
+      <div>
+        <div>Tên mã giảm giá: {{ couponDetail.code }}</div>
+        <div>Giảm {{ couponDetail.discount }}%</div>
+        <div>Đơn Tối Thiểu ₫{{ couponDetail.minAmount.toLocaleString('de-DE') }}</div>
+        <div>Còn lại {{ couponDetail.quantity }} mã cho mỗi tài khoản 1 lần</div>
+        <div>HSD: {{ formatDate(couponDetail.expirationDate) }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading">
+    <h2>Loading...</h2>
+  </div>
+
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      mat-dialog-close
+    >
+      Đóng
+    </button>
+  </div>
+</div>
