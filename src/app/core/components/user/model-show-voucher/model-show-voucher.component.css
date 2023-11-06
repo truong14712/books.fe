@@ -1,0 +1,38 @@
+.scrollable-container {
+  max-height: 250px;
+  /* Điều chỉnh kích thước của thanh trượt */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: rgba(92, 91, 91, 0.3);
+  border-radius: 3px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scrollable-item {
+  padding: 10px;
+  /* Khoảng cách nội dung từ các viền */
+  /* background-color: #f1f1f1; */
+  /* Màu nền của các phần tử */
+  border-radius: 5px;
+  /* Bo góc của các phần tử */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  /* Hiệu ứng bóng đổ */
+  transition: background-color 0.3s ease;
+  /* Hiệu ứng chuyển đổi màu nền */
+}
+
+.scrollable-item:hover {
+  /* background-color: #e1e1e1; */
+  /* Màu nền khi di chuột qua các phần tử */
+}
