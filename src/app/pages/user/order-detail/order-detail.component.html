@@ -1,0 +1,162 @@
+<div class="container mx-auto w-[1280px] my-4">
+  <div
+    class="g03JX2"
+    *ngIf="!isLoading"
+  >
+    <div class="JVNZdO">
+      <a
+        routerLink="/user/purchase"
+        class="tz58Eo"
+        ><span class="text-base uppercase">Trở lại</span></a
+      >
+      <div>
+        <div class="w8MDQX">
+          <span>MÃ ĐƠN HÀNG. {{ orderDetail.orderId }}</span>
+          <span class="EkDKzu">|</span>
+          <span class="capx2D">ĐƠN HÀNG ĐÃ HOÀN THÀNH</span>
+        </div>
+      </div>
+    </div>
+    <div class="O2KPzo"></div>
+    <div class="z8GWA3">
+      <div class="OlNNjU">
+        <div class="psdeAM">
+          <div class="ICo-FQ">
+            <div class="-evyOM">Cảm ơn bạn đã mua sắm tại BookShop!</div>
+            <div class="_5roFKV">
+              <ng-container *ngIf="orderDetail.status === 'Hoàn thành'">
+                <button
+                  class="stardust-button stardust-button--primary WgYvse"
+                  (click)="handleRepurchase(orderDetail._id)"
+                >
+                  Mua lại
+                </button>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cmp831">
+      <div class="DM1xQK"></div>
+    </div>
+    <div class="mu8SJw">
+      <div class="_0Ihttg"><div class="PW9gQm">Địa chỉ nhận hàng</div></div>
+      <div class="">
+        <div class="KZmoHt">{{ user.firstName + ' ' + user.lastName }}</div>
+        <div class="AnJAa1">(+84) {{ user.phoneNumber }}</div>
+        <div
+          class="AnJAa1"
+          *ngIf="orderDetail.paymentInfo.type === 'Thanh toán khi nhận hàng'"
+        >
+          {{
+            orderDetail.shippingAddress.address +
+              ' ' +
+              orderDetail.shippingAddress.state +
+              ' ' +
+              orderDetail.shippingAddress.city +
+              ' ' +
+              orderDetail.shippingAddress.country
+          }}
+        </div>
+        <div
+          class="AnJAa1"
+          *ngIf="orderDetail.paymentInfo.type === 'Thanh toán qua ví paypal'"
+        >
+          {{
+            orderDetail.shippingAddress.admin_area_1 +
+              ' ' +
+              orderDetail.shippingAddress.admin_area_2 +
+              ' ' +
+              orderDetail.shippingAddress.country_code
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="DMmbtH">
+      <div class="product">Sản phẩm</div>
+      <div *ngFor="let book of orderDetail.cart">
+        <div class="_90WPZk">
+          <div>
+            <div class="kZWCCe">
+              <a routerLink="/book-detail/{{ book.slug }}/{{ book._id }}">
+                <div class="L4d8ZG">
+                  <img
+                    [src]="book.images[3].url"
+                    alt=""
+                  />
+                </div>
+                <div class="BR8gDP">
+                  <div class="PBkUuG">
+                    <span>{{ book.nameBook }}</span>
+                  </div>
+                  <div class="NpT615">x{{ book.quantity }}</div>
+                </div>
+                <div class="pvNjHz">
+                  <span
+                    class="  {{
+                      book.discountPrice === 0
+                        ? 'text-sm text-[rgba(0,0,0,.87)]'
+                        : 'mr-2 text-sm font-light line-through text-[rgba(0,0,0,.54)]'
+                    }}"
+                    >₫{{ book.price.toLocaleString('de-DE') }}</span
+                  >
+                  <span
+                    class="-x3Dqh OkfGBc"
+                    *ngIf="book.discountPrice !== 0"
+                    >₫{{ book.discountPrice.toLocaleString('de-DE') }}</span
+                  >
+                </div>
+                <div *ngIf="book.ratings >= 1">
+                  <ng-container *ngFor="let rating of getStarArray(book.ratings)">
+                    <i class="mr-1 text-base text-[#eea72d] cursor-pointer fa-solid fa-star"></i>
+                  </ng-container>
+                </div>
+              </a>
+              <div
+                class="_5roFKV"
+                *ngIf="!book.isReviewed && orderDetail.status === 'Hoàn thành'"
+              >
+                <button
+                  class="stardust-button stardust-button--primary WgYvse"
+                  (click)="handleReviewOrder(book._id, orderDetail._id)"
+                >
+                  Đánh giá
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ju3iK+">
+      <div class="G2xWxP">
+        <div class="Lov07e">Tổng tiền hàng</div>
+        <div class="_7TXYl9">
+          <div>
+            <span>₫{{ orderDetail.totalPrice.toLocaleString('de-DE') }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="G2xWxP">
+        <div class="Lov07e">Phí vận chuyển</div>
+        <div class="_7TXYl9">
+          <span>₫{{ orderDetail.shippingFee }}</span>
+        </div>
+      </div>
+      <div class="G2xWxP">
+        <div class="Lov07e">Thành tiền</div>
+        <div class="_7TXYl9">
+          <span class="text-[#ee4d2d] text-2xl">₫{{ orderDetail.totalPrice.toLocaleString('de-DE') }}</span>
+        </div>
+      </div>
+      <div class="G2xWxP">
+        <div class="Lov07e">Phương thức Thanh toán</div>
+        <div class="_7TXYl9">
+          <span>Thanh toán khi nhận hàng</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoading">Loading...</div>
+</div>
