@@ -20,6 +20,6 @@ export class ModelProfileAdminComponent {
   logout() {
     localStorage.clear();
     this.auth.logout();
-    this.Router.navigate(['/login']);
+    this.Router.navigate(['buyer/login']);
   }
 }
