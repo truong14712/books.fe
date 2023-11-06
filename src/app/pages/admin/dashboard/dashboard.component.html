@@ -1,0 +1,122 @@
+<div class="container mx-auto w-[1440px] my-5">
+  <div class="my-2">
+    <h2 class="text-center uppercase">Tổng doanh thu</h2>
+
+    <form
+      [formGroup]="myForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="flex items-start justify-center gap-5">
+        <div>
+          <mat-form-field class="form-field">
+            <mat-label>Từ</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              placeholder="Từ"
+              formControlName="fromDate"
+            />
+            <mat-hint>Tháng/Ngày/Năm</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker1"
+            >
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-error *ngIf="myForm.get('fromDate')?.hasError('required')">
+              Ngày bắt đầu không được để trống
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="form-field">
+            <mat-label>Đến</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              placeholder="Đến"
+              formControlName="toDate"
+            />
+            <mat-hint>Tháng/Ngày/Năm</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker2"
+            >
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-error *ngIf="myForm.get('toDate')?.hasError('required')">
+              Ngày kết thúc đến không được để trống
+            </mat-error>
+            <mat-error *ngIf="myForm.get('toDate')?.hasError('invalidToDate')">
+              Ngày kết thúc phải lớn hơn ngày bắt đầu
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <button
+          type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none button"
+        >
+          Tìm kiếm
+        </button>
+      </div>
+    </form>
+    <div class="flex items-center justify-center mt-2">
+      <canvas
+        baseChart
+        width="400"
+        height="400"
+        [type]="'line'"
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        [legend]="lineChartLegend"
+      >
+      </canvas>
+    </div>
+  </div>
+  <div class="flex items-center justify-around">
+    <div>
+      <h2 class="text-center uppercase">Số đơn hàng</h2>
+      <canvas
+        class="w-[400px] h-[400px]"
+        baseChart
+        [type]="'pie'"
+        [datasets]="totalOrder"
+        [labels]="statusOrder"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend"
+      >
+      </canvas>
+    </div>
+    <div>
+      <h2 class="text-center uppercase">Lượt đánh giá sách</h2>
+      <canvas
+        class="w-[400px] h-[400px]"
+        baseChart
+        [type]="'pie'"
+        [datasets]="countRatting"
+        [labels]="ratting"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend"
+      >
+      </canvas>
+    </div>
+  </div>
+  <!-- <div class="mt-5">
+    <h2 class="text-center uppercase">Doanh thu của tác giả</h2>
+    <div>
+      <canvas
+        class="w-[400px] h-[400px]"
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [type]="'bar'"
+      >
+      </canvas>
+    </div>
+  </div> -->
+</div>
