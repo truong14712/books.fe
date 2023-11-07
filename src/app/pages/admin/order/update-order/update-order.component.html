@@ -1,0 +1,26 @@
+<div class="container mx-auto w-[640px]">
+  <div class="p-4 mt-2 text-xl text-blue-600 uppercase">cập nhật trạng thái đơn hàng</div>
+  <div mat-dialog-content>
+    <form (submit)="onSubmit()">
+      <mat-form-field class="w-full">
+        <mat-label>Trạng thái</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option
+            *ngFor="let item of listStatus"
+            [value]="item.value"
+            >{{ item.status }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <div class="flex items-center justify-center">
+        <button
+          type="submit"
+          mat-dialog-close
+          class="p-4 my-2 text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5"
+        >
+          Đồng ý
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
