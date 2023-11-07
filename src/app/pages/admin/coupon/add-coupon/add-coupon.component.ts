@@ -38,15 +38,20 @@ export class AddCouponComponent implements OnInit {
       minAmount: this.myForm.value.minAmount,
       quantity: this.myForm.value.quantity,
     };
-    this.coupon
-      .addCoupon(data)
-      .subscribe((data: { message: string; data: Coupon; isSuccess: boolean; status: boolean }) => {
-        console.log(data);
+    this.coupon.addCoupon(data).subscribe(
+      (data: { message: string; data: Coupon; isSuccess: boolean; status: boolean }) => {
         this._snackBar.open(`${data.message}`, 'OK', {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         });
         this.router.navigate(['admin/coupon']);
-      });
+      },
+      (error) => {
+        this._snackBar.open(`${error.message}`, 'OK', {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+      },
+    );
   }
 }

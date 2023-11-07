@@ -53,15 +53,21 @@ export class UpdateCouponComponent implements OnInit {
       minAmount: this.myForm.value.minAmount || 0,
       quantity: this.myForm.value.quantity || 0,
     };
-    this.coupon
-      .updateCoupon(data, String(this.newCoupon._id))
-      .subscribe((data: { message: string; data: Coupon; isSuccess: boolean; status: boolean }) => {
+    this.coupon.updateCoupon(data, String(this.newCoupon._id)).subscribe(
+      (data: { message: string; data: Coupon; isSuccess: boolean; status: boolean }) => {
         console.log(data);
         this._snackBar.open(`${data.message}`, 'OK', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
         });
         this.router.navigate(['admin/coupon']);
-      });
+      },
+      (error) => {
+        this._snackBar.open(`${error.message}`, 'OK', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+    );
   }
 }
