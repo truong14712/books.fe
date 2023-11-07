@@ -1,0 +1,32 @@
+<div class="container mx-auto w-[640px]">
+  <div mat-dialog-content>
+    <form (submit)="onSubmit()">
+      <div class="mt-2">
+        <mat-form-field class="w-full">
+          <mat-label>Chọn Lý Do Hủy</mat-label>
+          <mat-select
+            [(value)]="selected"
+            required
+          >
+            <mat-option
+              *ngFor="let reason of listReason"
+              value="{{ reason.name }}"
+              >{{ reason.name }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="selected === ''">Vui lòng chọn lý do hủy</mat-error>
+          <div *ngIf="!selected">Vui lòng chọn lý do hủy</div>
+        </mat-form-field>
+      </div>
+      <div class="flex items-center justify-center">
+        <button
+          type="submit"
+          mat-dialog-close
+          class="p-4 my-2 text-white bg-[#ee4d2d] hover:bg-[#cd3011] focus:ring-2 focus:ring-[#ee4d2d] rounded-sm text-sm w-[130px] px-5 py-2.5 h-[40px]"
+        >
+          Đồng ý
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
