@@ -1,0 +1,93 @@
+<div class="overflow-x-auto container mx-auto w-[1440px]">
+  <div class="my-3 text-lg font-medium text-center">Chi tiết đơn hàng</div>
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+      <tr>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Tên sách
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Ảnh
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Tác giả
+        </th>
+
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Giá tiền
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Số lượng
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3"
+        >
+          Thành tiền
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let book of listCart; let index">
+      <tr class="bg-white border-b">
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{ book.nameBook }}
+        </th>
+        <td class="py-4">
+          <img
+            src="{{ book.images[3].url }}"
+            alt="{{ book.nameBook }}"
+            class="w-[60px] h-full"
+          />
+        </td>
+
+        <td class="px-6 py-4">{{ book.auth }}</td>
+        <td
+          class="px-6 py-4"
+          *ngIf="book.discountPrice === 0"
+        >
+          ₫{{ book.price.toLocaleString('vi-VN') }}
+        </td>
+        <td
+          class="px-6 py-4"
+          *ngIf="book.discountPrice !== 0"
+        >
+          ₫{{ book.discountPrice.toLocaleString('vi-VN') }}
+        </td>
+        <td class="px-6 py-4">x{{ book.quantity }}</td>
+        <td
+          class="px-6 py-4 text-red-500"
+          *ngIf="book.discountPrice === 0"
+        >
+          ₫{{ (book.price * book.quantity).toLocaleString('vi-VN') }}
+        </td>
+        <td
+          class="px-6 py-4 text-red-500"
+          *ngIf="book.discountPrice !== 0"
+        >
+          ₫{{ (book.discountPrice * book.quantity).toLocaleString('vi-VN') }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex items-center justify-end p-2 my-2 text-lg">
+    <span class="mr-1">Tổng số tiền:</span> <span class="text-red-500"> ₫{{ totalPrice.toLocaleString('vi-VN') }}</span>
+  </div>
+</div>
