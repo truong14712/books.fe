@@ -1,0 +1,83 @@
+<div class="container mx-auto w-[1280px] my-4">
+  <div
+    class="g03JX2"
+    *ngIf="!isLoading"
+  >
+    <div class="JVNZdO">
+      <a
+        routerLink="/user/purchase"
+        class="tz58Eo"
+        ><span class="text-base uppercase">Trở lại</span></a
+      >
+      <div>
+        <div class="DuW1Wc">Yêu cầu vào: {{ formattedDate(orderDetail.deliveredAt) }}.</div>
+      </div>
+    </div>
+    <div class="O2KPzo"></div>
+    <div class="z8GWA3">
+      <div class="OlNNjU">
+        <div class="psdeAM">
+          <div class="LrjR+B">Đã hủy đơn hàng</div>
+          <div class="qS3A+k">vào {{ formattedDate(orderDetail.deliveredAt) }}.</div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="DMmbtH"
+      *ngFor="let book of orderDetail.cart"
+    >
+      <div class="_90WPZk">
+        <div>
+          <div class="kZWCCe">
+            <a routerLink="/book-detail/{{ book.slug }}/{{ book._id }}">
+              <div class="L4d8ZG">
+                <img
+                  [src]="book.images[3].url"
+                  alt=""
+                />
+              </div>
+              <div class="BR8gDP">
+                <div class="PBkUuG">
+                  <span>{{ book.nameBook }}</span>
+                </div>
+                <div class="NpT615">x{{ book.quantity }}</div>
+              </div>
+              <div class="pvNjHz">
+                <div *ngIf="book.discountPrice === 0">
+                  <span>₫{{ book.price.toLocaleString('de-DE') }}</span>
+                </div>
+                <div *ngIf="book.discountPrice !== 0">
+                  <span>₫{{ book.discountPrice.toLocaleString('de-DE') }}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ju3iK+">
+      <div class="G2xWxP">
+        <div class="Lov07e">Yêu cầu bởi</div>
+        <div class="_7TXYl9">
+          <span>Người dùng</span>
+        </div>
+      </div>
+      <div class="G2xWxP">
+        <div class="Lov07e">Phương thức thanh toán</div>
+        <div class="_7TXYl9">
+          <span>{{ orderDetail.paymentInfo.type }}</span>
+        </div>
+      </div>
+      <div class="G2xWxP">
+        <div class="Lov07e">Mã đơn hàng</div>
+        <div class="_7TXYl9">
+          <span class="text-[#ee4d2d]">{{ orderDetail.orderId }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="aafn3z">
+      <div class="-723CI">Lý do: {{ orderDetail.reason }}</div>
+    </div>
+  </div>
+  <div *ngIf="isLoading">Loading...</div>
+</div>
