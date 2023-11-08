@@ -1,0 +1,58 @@
+.FEE-3D {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  margin-bottom: 0.9375rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.Yu7gVR {
+  display: block;
+  padding: 0 0 0.1875rem 2.125rem;
+}
+
+.qyt-aY:hover,
+.tH0d6d {
+  color: #ee4d2d;
+}
+
+.\+1u02e {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.9375rem;
+}
+
+.bfikuD {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  text-align: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 0.625rem;
+}
+
+.\+1u02e,
+.qyt-aY {
+  text-transform: capitalize;
+  transition: color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.qyt-aY {
+  font-size: 0.875rem;
+  display: block;
+}
+
+.FEE-3D:not(:active) .tH0d6d {
+  display: none;
+}
+
+.active {
+  color: red;
+  /* Thay đổi màu sắc theo ý muốn */
+}
