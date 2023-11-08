@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((error) => {
           if (error.status === 400) {
             this.authService.logout();
-            this.route.navigate(['/login']);
+            this.route.navigate(['buyer/login']);
           }
           return throwError(() => error);
         }),
