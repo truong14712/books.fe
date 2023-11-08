@@ -1,0 +1,99 @@
+<div class="container mx-auto w-[680px]">
+  <div class="p-4 mt-2 text-xl text-blue-600 uppercase">Báo Cáo Đánh Giá Này</div>
+
+  <div mat-dialog-content>
+    <form (submit)="onSubmit()">
+      <mat-label class="nCzOIn">Vui lòng chọn lý do báo cáo</mat-label>
+      <div class="mt-2">
+        <mat-radio-group
+          aria-label="Select an Reason"
+          [(ngModel)]="selectedReason"
+          name="selectedReason"
+        >
+          <ul>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Đánh giá thô tục phản cảm"
+                class="w-full"
+                ><div class="w-[570px]">Đánh giá thô tục phản cảm</div></mat-radio-button
+              >
+            </li>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Chứa hình ảnh phản cảm, khỏa thân, khiêu dâm"
+                class="w-full"
+                ><div class="w-[570px]">Chứa hình ảnh phản cảm, khỏa thân, khiêu dâm</div></mat-radio-button
+              >
+            </li>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Đánh giá trùng lặp (thông tin rác)"
+                class="w-full"
+                ><div class="w-[570px]">Đánh giá trùng lặp (thông tin rác)</div></mat-radio-button
+              >
+            </li>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Chứa thông tin cá nhân"
+                class="w-full"
+                ><div class="w-[570px]">Chứa thông tin cá nhân</div></mat-radio-button
+              >
+            </li>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Quảng cáo trái phép"
+                class="w-full"
+                ><div class="w-[570px]">Quảng cáo trái phép</div></mat-radio-button
+              >
+            </li>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Đánh giá không chính xác / gây hiểu lầm (ví dụ như: đánh giá và sản phẩm không khớp,...)"
+                class="w-full"
+                ><div class="w-[570px]">
+                  Đánh giá không chính xác / gây hiểu lầm (ví dụ như: đánh giá và sản phẩm không khớp, ...)
+                </div></mat-radio-button
+              >
+            </li>
+            <li class="lpg6hM">
+              <mat-radio-button
+                value="Vi phạm khác"
+                class="w-full"
+              >
+                <div class="w-[570px]">Vi phạm khác</div>
+              </mat-radio-button>
+            </li>
+            <div class="">
+              <input
+                *ngIf="selectedReason === 'Vi phạm khác'"
+                type="text"
+                placeholder="Vui lòng mô tả chi tiết vi phạm (bắt buộc)"
+                maxlength="300"
+                class="w-[570px] border-solid border p-[0.75rem] rounded-sm outline-0 appearance-none mb-3 mx-3"
+                [(ngModel)]="otherViolation"
+                name="otherViolation"
+              />
+            </div>
+          </ul>
+        </mat-radio-group>
+      </div>
+      <div class="flex items-center justify-end">
+        <button
+          mat-dialog-close
+          class="p-4 my-2 rounded-sm text-sm w-[130px] px-5 py-2.5 h-[40px]"
+        >
+          Hủy
+        </button>
+        <button
+          type="submit"
+          mat-dialog-close
+          [disabled]="!selectedReason || (selectedReason === 'Vi phạm khác' && !otherViolation)"
+          [class.disabled]="!selectedReason || (selectedReason === 'Vi phạm khác' && !otherViolation)"
+          class="p-4 my-2 text-white bg-[#ee4d2d] hover:bg-[#cd3011] focus:ring-[#ee4d2d] rounded-sm text-sm w-[130px] px-5 py-2.5 h-[40px] cursor-pointer"
+        >
+          Gửi
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

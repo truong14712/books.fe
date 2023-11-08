@@ -1,0 +1,23 @@
+.nCzOIn {
+  height: 2rem;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+  margin-bottom: 0.625rem;
+}
+
+.lpg6hM {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
