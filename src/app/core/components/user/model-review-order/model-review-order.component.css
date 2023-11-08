@@ -1,0 +1,20 @@
+.scrollable-container {
+  max-height: 220px;
+  /* Điều chỉnh kích thước của thanh trượt */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: rgba(92, 91, 91, 0.3);
+  border-radius: 3px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
