@@ -35,14 +35,18 @@ import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from '@pages/pageNotFound/pageNotFound.component';
 import { RegisterComponent } from '@pages/register/register.component';
 import { SharedModule } from '@core/modules/shared-module/shared-module.module';
+import { SpinnerComponent } from '@core/components/spinner/spinner.component';
 import { TruncatePipe } from '@core/pipe/truncate.pipe';
 import { UserFooterComponent } from '@core/components/user/user-footer/user-footer.component';
 import { UserHeaderComponent } from '@core/components/user/user-header/user-header.component';
 import { UserLayoutComponent } from '@core/layouts/userLayout/userLayout.component';
 import { UserNavbarComponent } from '@core/components/user/user-navbar/user-navbar.component';
 import { UserSidebarComponent } from '@core/components/user/user-sidebar/user-sidebar.component';
-import { SpinnerComponent } from '@core/components/spinner/spinner.component';
-import { ModelShowVoucherComponent } from '@core/components/user/model-show-voucher/model-show-voucher.component';
+import { ResetPasswordComponent } from '@pages/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from '@pages/user/forgot-password/forgot-password.component';
+import { LoginSuccessFacebookComponent } from '@pages/login-success-facebook/login-success-facebook.component';
+import { LoginSuccessGoogleComponent } from '@pages/login-success-google/login-success-google.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +73,10 @@ import { ModelShowVoucherComponent } from '@core/components/user/model-show-vouc
     TruncatePipe,
     CartComponent,
     SpinnerComponent,
-    ModelShowVoucherComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent,
+    LoginSuccessFacebookComponent,
+    LoginSuccessGoogleComponent,
   ],
   imports: [
     BrowserModule,

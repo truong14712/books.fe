@@ -15,11 +15,17 @@ import { RegisterComponent } from '@pages/register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserGuard } from '@core/guards/user.guard';
 import { UserLayoutComponent } from '@core/layouts/userLayout/userLayout.component';
+import { ResetPasswordComponent } from '@pages/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from '@pages/user/forgot-password/forgot-password.component';
+import { LoginSuccessGoogleComponent } from '@pages/login-success-google/login-success-google.component';
+import { LoginSuccessFacebookComponent } from '@pages/login-success-facebook/login-success-facebook.component';
+
 const routes: Routes = [
   {
     path: '',
     component: UserLayoutComponent,
     children: [
+      { path: 'home', redirectTo: '', pathMatch: 'full' },
       {
         path: '',
         component: HomeComponent,
@@ -46,20 +52,27 @@ const routes: Routes = [
       },
     ],
   },
+
   {
     path: 'user',
     component: UserLayoutComponent,
     canActivate: [UserGuard],
     children: [...AuthRoutingModule.routes],
   },
+
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [AdminGuard],
     children: [...AdminRoutingModule.routes],
   },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+
+  { path: 'buyer/register', component: RegisterComponent },
+  { path: 'buyer/reset', component: ResetPasswordComponent },
+  { path: 'buyer/forgot-password/:id', component: ForgotPasswordComponent },
+  { path: 'buyer/login', component: LoginComponent },
+  { path: 'buyer/login-success-google/:id', component: LoginSuccessGoogleComponent },
+  { path: 'buyer/login-success-facebook/:id', component: LoginSuccessFacebookComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
