@@ -435,6 +435,7 @@
           </div>
         </div>
       </div>
+      <ng-container *ngIf="!book.reviews.length"><div class="text-xl text-center">Không có đánh giá</div></ng-container>
       <div
         class="flex items-center justify-center gap-3 mt-3"
         *ngIf="book.reviews.length > 0"
@@ -461,8 +462,8 @@
   </div>
 </div>
 <div
-  class="container mx-auto my-8 w-[1440px]"
+  class="container mx-auto my-8 w-[1440px] text-center"
   *ngIf="isLoading"
 >
-  Loading...
+  <app-spinner></app-spinner>
 </div>
