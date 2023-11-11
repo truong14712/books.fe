@@ -23,19 +23,8 @@ export class OrderDetailComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private auth: AuthService,
-  ) {
-    this.ActivatedRoute.paramMap.subscribe((params) => {
-      const id = String(params.get('id'));
-      this.order.getOneOrder(id).subscribe(({ data }) => {
-        this.orderDetail = data;
-        console.log(this.orderDetail);
-        this.isLoading = false;
-      });
-    });
-    this.user = this.auth.isAuthenticated();
-    console.log(this.user);
-  }
-  handleReviewOrder(id: any, orderId: string) {
+  ) {}
+  handleReviewOrder(id: string, orderId: string) {
     const dialogRef = this.dialog.open(ModelReviewOrderComponent, {
       data: { id, orderId },
     });
@@ -45,7 +34,17 @@ export class OrderDetailComponent implements OnInit {
       }
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.ActivatedRoute.paramMap.subscribe((params) => {
+      const id = String(params.get('id'));
+      this.order.getOneOrder(id).subscribe(({ data }) => {
+        this.orderDetail = data;
+        console.log(this.orderDetail);
+        this.isLoading = false;
+      });
+    });
+    this.user = this.auth.isAuthenticated();
+  }
   getStarArray(ratings: number): number[] {
     return Array(ratings).fill({});
   }
