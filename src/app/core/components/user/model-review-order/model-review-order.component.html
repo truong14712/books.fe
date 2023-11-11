@@ -69,5 +69,10 @@
       </button>
     </div>
   </div>
-  <div *ngIf="isLoading">Loading...</div>
+  <div
+    class="text-center"
+    *ngIf="isLoading"
+  >
+    <app-user-spinner></app-user-spinner>
+  </div>
 </div>
