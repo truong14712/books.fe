@@ -218,5 +218,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="isLoading">Loading...</div>
+  <div
+    *ngIf="isLoading"
+    class="text-center"
+  >
+    <app-spinner></app-spinner>
+  </div>
 </div>
