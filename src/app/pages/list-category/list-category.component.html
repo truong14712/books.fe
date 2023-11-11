@@ -1,4 +1,7 @@
-<div class="container mx-auto w-[1280px]">
+<div
+  class="container mx-auto w-[1280px]"
+  *ngIf="!isLoading"
+>
   <div class="my-4 text-xl font-semibold">Thể loại</div>
   <ul class="grid grid-cols-4 gap-5">
     <ng-container *ngFor="let item of listCategory; index as i">
@@ -14,4 +17,10 @@
       </ng-container>
     </ng-container>
   </ul>
+</div>
+<div
+  class="mt-3 text-center"
+  *ngIf="isLoading"
+>
+  <app-spinner></app-spinner>
 </div>

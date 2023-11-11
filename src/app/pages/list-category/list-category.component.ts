@@ -9,11 +9,13 @@ import { CategoryService } from '@core/services/category/category.service';
 })
 export class ListCategoryComponent implements OnInit {
   listCategory: Category[] = [];
+  isLoading = true;
   constructor(private category: CategoryService) {}
 
   ngOnInit() {
     this.category.getAllCategory().subscribe((data) => {
       this.listCategory = data.data.docs.length > 0 ? data.data.docs : [];
+      this.isLoading = false;
     });
   }
 }
