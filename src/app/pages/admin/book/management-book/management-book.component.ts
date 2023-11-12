@@ -19,6 +19,7 @@ export class ManagementBookComponent implements OnInit {
   dataSource!: MatTableDataSource<Book>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  isLoading = true;
   constructor(
     private _snackBar: MatSnackBar,
     private book: BookService,
@@ -32,6 +33,7 @@ export class ManagementBookComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Book>(this.listBook);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
   }
 

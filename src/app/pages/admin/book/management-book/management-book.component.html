@@ -1,4 +1,7 @@
-<div class="container mx-auto w-[1440px] mb-5">
+<div
+  class="container mx-auto w-[1440px] mb-5"
+  *ngIf="!isLoading"
+>
   <div>
     <button
       mat-raised-button
@@ -151,4 +154,10 @@
     >
     </mat-paginator>
   </div>
+</div>
+<div
+  class="text-center"
+  *ngIf="isLoading"
+>
+  <app-admin-spinner></app-admin-spinner>
 </div>
