@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared-module/shared-module.module';
 import { UpdateAddressComponent } from '@pages/user/update-address/update-address.component';
 import { UserSidebarProfileComponent } from '@core/components/user/user-sidebar-profile/user-sidebar-profile.component';
+import { UserSpinnerComponent } from '@core/components/user/user-spinner/user-spinner.component';
 @NgModule({
   declarations: [
     ChangeInforMationComponent,
@@ -48,6 +49,7 @@ import { UserSidebarProfileComponent } from '@core/components/user/user-sidebar-
     ModelReportComponent,
     UserSidebarProfileComponent,
     UpdateAddressComponent,
+    UserSpinnerComponent,
   ],
   imports: [
     BrowserAnimationsModule,

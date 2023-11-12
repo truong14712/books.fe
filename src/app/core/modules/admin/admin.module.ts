@@ -36,6 +36,7 @@ import { UpdateCategoryComponent } from '@pages/admin/category/update-category/u
 import { UpdateCouponComponent } from '@pages/admin/coupon/update-coupon/update-coupon.component';
 import { UpdateEventComponent } from '@pages/admin/event/update-event/update-event.component';
 import { UpdateOrderComponent } from '@pages/admin/order/update-order/update-order.component';
+import { AdminSpinnerComponent } from '@core/components/admin/admin-spinner/admin-spinner.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { UpdateOrderComponent } from '@pages/admin/order/update-order/update-ord
     ManagementReportComponent,
     DetailReportComponent,
     DashboardComponent,
+    AdminSpinnerComponent,
   ],
   imports: [
     FormsModule,
