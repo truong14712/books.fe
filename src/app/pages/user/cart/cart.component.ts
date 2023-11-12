@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
   totalPage!: number;
   currentPage = 1;
   itemsPerPage = 10;
+  isLoading = true;
   constructor(
     private cart: CartService,
     private auth: AuthService,
@@ -41,6 +42,7 @@ export class CartComponent implements OnInit {
         if (data?.books?.length === 0) {
           this.listCart = data.books;
           this.cart.updateCartItemCount(data.books.length);
+          this.isLoading = false;
         } else {
           this.listCart = data?.books?.map((item: any) => {
             const existingBook = this.listCart.find((b: Book) => b._id === item.bookId._id);
@@ -52,6 +54,7 @@ export class CartComponent implements OnInit {
           });
           this.totalPage = Math.ceil(this.listCart.length / this.itemsPerPage);
           this.cart.updateCartItemCount(data.books.length);
+          this.isLoading = false;
         }
       });
     }

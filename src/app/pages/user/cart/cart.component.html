@@ -1,4 +1,4 @@
-<div class="container mx-auto w-[1440px]">
+<div class="container mx-auto w-[1440px]" *ngIf="!isLoading">
   <div class="p-2 my-4 text-xl font-medium text-blue-700 uppercase">Giỏ hàng</div>
   <div
     class="flex h-[55px] text-sm mb-3 px-20 rounded items-center bg-white text-[#888] border shadow-md"
@@ -188,7 +188,7 @@
 </div>
 <div
   class="container mx-auto w-[1440px] flex flex-col items-center justify-center text-center"
-  *ngIf="listCart.length === 0"
+  *ngIf="listCart.length === 0 && !isLoading"
 >
   <div class="p-2 my-4 text-xl text-center">Chưa có sản phẩm trong giỏ hàng của bạn</div>
   <a routerLink="/">
@@ -198,4 +198,7 @@
       Mua sắm ngay
     </button>
   </a>
+</div>
+<div class="text-center">
+  <app-spinner *ngIf="isLoading"></app-spinner>
 </div>
