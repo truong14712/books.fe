@@ -1,3 +1,6 @@
+// tk paypal test
+// truong12@gmail.com
+// 12345678
 export const environment = {
   production: false,
   env: 'local',

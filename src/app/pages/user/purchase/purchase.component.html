@@ -247,7 +247,12 @@
             </button>
           </div>
         </div>
-        <div *ngIf="isLoading">...Loading</div>
+        <div
+          *ngIf="isLoading"
+          class="text-center"
+        >
+          <app-user-spinner></app-user-spinner>
+        </div>
       </div>
     </div>
   </div>

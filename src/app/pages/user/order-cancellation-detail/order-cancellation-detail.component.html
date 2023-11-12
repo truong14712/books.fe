@@ -79,5 +79,7 @@
       <div class="-723CI">Lý do: {{ orderDetail.reason }}</div>
     </div>
   </div>
-  <div *ngIf="isLoading">Loading...</div>
+  <div *ngIf="isLoading">
+    <app-user-spinner></app-user-spinner>
+  </div>
 </div>

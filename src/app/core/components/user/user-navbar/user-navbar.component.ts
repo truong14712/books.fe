@@ -7,6 +7,7 @@ import { ModelAccountComponent } from '../model-account/model-account.component'
 import { CartService } from '@core/services/cart/cart.service';
 import { Book } from '@core/interfaces/book';
 import { User } from '@core/interfaces/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-navbar',
@@ -24,10 +25,11 @@ export class UserNavbarComponent implements OnInit {
     private dialog: MatDialog,
     private book: BookService,
     private cart: CartService,
+    private router: Router,
   ) {}
   getValue(value: string) {
-    const newValue = value.trim();
-    this.inputValue = newValue;
+    const query = value.trim();
+    this.inputValue = query;
     if (this.inputValue) {
       this.book.searchBook(value).subscribe(({ data }) => {
         this.dataSearch = data;
