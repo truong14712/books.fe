@@ -25,8 +25,11 @@
     </div>
   </div>
 
-  <div *ngIf="loading">
-    <h2>Loading...</h2>
+  <div
+    *ngIf="loading"
+    class="text-center"
+  >
+    <app-user-spinner></app-user-spinner>
   </div>
 
   <div mat-dialog-actions>
