@@ -20,6 +20,7 @@ export class ManagementUserComponent implements OnInit {
   dataSource!: MatTableDataSource<User>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  isLoading = true;
   constructor(
     private auth: AuthService,
     private _snackBar: MatSnackBar,
@@ -33,6 +34,7 @@ export class ManagementUserComponent implements OnInit {
       this.dataSource = new MatTableDataSource<User>(this.listUser);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
   }
 
