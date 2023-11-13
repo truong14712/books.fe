@@ -20,6 +20,7 @@ export class ManagementCategoryComponent implements OnInit {
   dataSource!: MatTableDataSource<Category>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  isLoading = true;
   constructor(
     private category: CategoryService,
     private _snackBar: MatSnackBar,
@@ -33,6 +34,7 @@ export class ManagementCategoryComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Category>(this.listCategory);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.isLoading = false;
       },
       (error) => {
         console.error(error);
