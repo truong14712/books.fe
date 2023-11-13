@@ -69,18 +69,18 @@
             </div>
           </ng-container>
         </div>
-      </div>
-      <div
-        class="text-center"
-        *ngIf="user.addresses?.length === 0"
-      >
-        <div class="py-2 text-xl font-medium">Chưa Có Địa Chỉ</div>
-        <div class="my-3">
-          <a
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
-            routerLink="/user/profile/addAddress"
-            ><i class="mr-2 fa-solid fa-plus"></i> <span>Thêm Địa Chỉ Mới</span></a
-          >
+        <div
+          class="text-center"
+          *ngIf="user.addresses?.length === 0"
+        >
+          <div class="py-2 text-xl font-medium">Chưa Có Địa Chỉ</div>
+          <div class="my-3">
+            <a
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+              routerLink="/user/profile/addAddress"
+              ><i class="mr-2 fa-solid fa-plus"></i> <span>Thêm Địa Chỉ Mới</span></a
+            >
+          </div>
         </div>
       </div>
     </div>
