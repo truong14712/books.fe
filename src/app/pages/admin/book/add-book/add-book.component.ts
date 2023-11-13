@@ -77,45 +77,54 @@ export class AddBookComponent implements OnInit {
     this.coverType = coverType;
   }
   onSubmit() {
-    if (this.myForm.valid) {
-      const formValue: any = this.myForm?.value;
-      const formData = new FormData();
-      formData.append('auth', formValue.auth);
-      formData.append('description', formValue.description);
-      formData.append('language', this.language);
-      formData.append('pageNumber', formValue.pageNumber);
-      formData.append('price', formValue.price);
-      formData.append('discountPrice', formValue.discountPrice);
-      formData.append('publicationYear', formValue.publicationYear);
-      formData.append('publisher', formValue.publisher);
-      formData.append('size', formValue.size);
-      formData.append('translator', formValue.translator);
-      formData.append('nameBook', formValue.nameBook);
-      formData.append('weight', formValue.weight);
-      formData.append('stock', formValue.stock);
-      formData.append('brand', formValue.brand);
-      formData.append('isHighlighted', formValue.isHighlighted);
-      formData.append('categoryId', this.categoryId);
-      this.images.forEach((file: File) => {
-        formData.append('images', file);
+    if (!this.images) {
+      this._snackBar.open('Vui lòng chọn 4 ảnh', 'OK', {
+        duration: 3000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
       });
-      formData.append('coverType', this.coverType);
-      this.newBook = formData;
-      this.book.addBook(this.newBook).subscribe(
-        (data: { isSuccess: boolean; status: number; message: string; data: Book }) => {
-          this._snackBar.open(`${data.message}`, 'OK', {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          });
-          this.router.navigate(['admin/book']);
-        },
-        (error) => {
-          this._snackBar.open(`${error.message}`, 'OK', {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          });
-        },
-      );
+      return;
+    } else {
+      if (this.myForm.valid) {
+        const formValue: any = this.myForm?.value;
+        const formData = new FormData();
+        formData.append('auth', formValue.auth);
+        formData.append('description', formValue.description);
+        formData.append('language', this.language);
+        formData.append('pageNumber', formValue.pageNumber);
+        formData.append('price', formValue.price);
+        formData.append('discountPrice', formValue.discountPrice);
+        formData.append('publicationYear', formValue.publicationYear);
+        formData.append('publisher', formValue.publisher);
+        formData.append('size', formValue.size);
+        formData.append('translator', formValue.translator);
+        formData.append('nameBook', formValue.nameBook);
+        formData.append('weight', formValue.weight);
+        formData.append('stock', formValue.stock);
+        formData.append('brand', formValue.brand);
+        formData.append('isHighlighted', formValue.isHighlighted);
+        formData.append('categoryId', this.categoryId);
+        this.images.forEach((file: File) => {
+          formData.append('images', file);
+        });
+        formData.append('coverType', this.coverType);
+        this.newBook = formData;
+        this.book.addBook(this.newBook).subscribe(
+          (data: { isSuccess: boolean; status: number; message: string; data: Book }) => {
+            this._snackBar.open(`${data.message}`, 'OK', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+            });
+            this.router.navigate(['admin/book']);
+          },
+          (error) => {
+            this._snackBar.open(`${error.message}`, 'OK', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+            });
+          },
+        );
+      }
     }
   }
 }
