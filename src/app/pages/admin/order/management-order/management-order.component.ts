@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from '@core/interfaces/order';
@@ -17,13 +16,11 @@ import { UpdateOrderComponent } from '../update-order/update-order.component';
 export class ManagementOrderComponent implements OnInit {
   listCoupon: Order[] = [];
   displayedColumns: string[] = ['_id', 'orderId', 'userId', 'totalPrice', 'status', 'shippingAddress', 'actions'];
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
   dataSource!: MatTableDataSource<Order>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  isLoading = true;
   constructor(
-    private _snackBar: MatSnackBar,
     private order: OrderService,
     private dialog: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
@@ -36,6 +33,7 @@ export class ManagementOrderComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Order>(this.listCoupon);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
   }
 
@@ -45,7 +43,6 @@ export class ManagementOrderComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        console.log(data);
         this.ngOnInit();
       }
     });
