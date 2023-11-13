@@ -1,7 +1,4 @@
-<div
-  class="container mx-auto w-[1440px] mb-5"
-  *ngIf="!isLoading"
->
+<div class="container mx-auto w-[1440px] mb-5">
   <div>
     <button
       mat-raised-button
@@ -149,7 +146,7 @@
     <mat-paginator
       class="mt-4"
       [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 15, 20]"
+      [pageSizeOptions]="[5, 10, 15, 20, 50]"
       showFirstLastButtons
     >
     </mat-paginator>

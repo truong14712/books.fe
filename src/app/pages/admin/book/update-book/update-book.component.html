@@ -301,14 +301,25 @@
         multiple="true"
       />
     </label>
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      class="submit-button"
-      [disabled]="!myForm.valid"
-    >
-      Đồng ý
-    </button>
+    <div class="flex items-center justify-center">
+      <a routerLink="/admin/book">
+        <button
+          type="button"
+          class="py-2.5 px-5 text-sm text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 w-[200px] h-[36px]"
+        >
+          Trở về
+        </button>
+      </a>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="ml-4 submit-button"
+        [disabled]="!myForm.valid"
+      >
+        Đồng ý
+      </button>
+    </div>
   </form>
 </div>
