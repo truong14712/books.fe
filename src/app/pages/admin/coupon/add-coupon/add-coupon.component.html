@@ -1,5 +1,5 @@
 <div class="container mx-auto mb-4">
-  <h1 class="text-center">Thêm Mã Giảm Giá</h1>
+  <h1 class="text-center">Thêm Phiếu Giảm Giá</h1>
   <form
     [formGroup]="myForm"
     (ngSubmit)="onSubmit()"
@@ -42,7 +42,7 @@
     </mat-form-field>
 
     <mat-form-field class="form-field">
-      <mat-label>Chọn Ngày Tháng</mat-label>
+      <mat-label>Ngày hết hạn</mat-label>
       <input
         matInput
         [matDatepicker]="picker"
@@ -112,14 +112,25 @@
       <mat-error *ngIf="myForm.hasError('whitespace', 'quantity')"> Số lượng Không Được Chứa Khoảng Trắng </mat-error>
     </mat-form-field>
 
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      class="my-4 submit-button"
-      [disabled]="!myForm.valid"
-    >
-      Đồng ý
-    </button>
+    <div class="flex items-center justify-center">
+      <a routerLink="/admin/coupon">
+        <button
+          type="button"
+          class="py-2.5 px-5 text-sm text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 w-[200px] h-[36px]"
+        >
+          Trở về
+        </button>
+      </a>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="ml-4 submit-button"
+        [disabled]="!myForm.valid"
+      >
+        Đồng ý
+      </button>
+    </div>
   </form>
 </div>

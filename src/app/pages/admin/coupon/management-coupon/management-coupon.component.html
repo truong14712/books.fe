@@ -5,7 +5,7 @@
       color="primary"
       class="mx-4 text-left"
     >
-      <a [routerLink]="['/admin/coupon/add']"> Thêm Mã Giảm Giá </a>
+      <a [routerLink]="['/admin/coupon/add']"> Thêm Phiếu Giảm Giá </a>
     </button>
   </div>
   <div>
@@ -147,5 +147,11 @@
       showFirstLastButtons
     >
     </mat-paginator>
+  </div>
+  <div
+    *ngIf="isLoading"
+    class="text-center"
+  >
+    <app-admin-spinner></app-admin-spinner>
   </div>
 </div>

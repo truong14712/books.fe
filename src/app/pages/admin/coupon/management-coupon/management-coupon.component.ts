@@ -20,6 +20,7 @@ export class ManagementCouponComponent implements OnInit {
   dataSource!: MatTableDataSource<Coupon>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  isLoading = true;
   constructor(
     private coupon: CouponService,
     private _snackBar: MatSnackBar,
@@ -33,6 +34,7 @@ export class ManagementCouponComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Coupon>(this.listCoupon);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
   }
 
