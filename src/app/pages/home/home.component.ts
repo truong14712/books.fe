@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
           this.startCountdown(value.finish_Date);
         }
       });
+      this.isLoading = false;
     });
   }
   handleListBookChange(listBook: Book[]) {
