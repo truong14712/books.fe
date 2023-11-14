@@ -17,6 +17,7 @@ export class ManagementReportComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  isLoading = true;
   constructor(
     private report: ReportService,
     private _liveAnnouncer: LiveAnnouncer,
@@ -30,6 +31,7 @@ export class ManagementReportComponent implements OnInit {
       this.dataSource = new MatTableDataSource<any>(this.listBook);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
   }
   announceSortChange(sortState: Sort) {

@@ -1,27 +1,44 @@
-<div class="container mx-auto w-[1440px] my-5">
+<div
+  class="container mx-auto w-[1440px] my-5"
+  *ngIf="!isLoading"
+>
   <div class="my-3 text-lg text-center">Chi tiết báo cáo đánh giá</div>
-  <div class="grid grid-cols-2 gap-5">
+  <a routerLink="/admin/report">
+    <button
+      class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+    >
+      Trở về
+    </button>
+  </a>
+  <div class="grid grid-cols-2 gap-5 my-2">
     <div>
-      <div>Người dùng</div>
+      <div class="text-base uppercase">Người dùng</div>
       <div class="my-1">Họ và Tên: {{ detailReport.userId.firstName + ' ' + detailReport.userId.lastName }}</div>
       <div>Email: {{ detailReport.userId.email }}</div>
       <div class="my-1">Phone: {{ detailReport.userId.phoneNumber }}</div>
     </div>
     <div>
-      <div>Sách</div>
+      <div class="text-base uppercase">Sách</div>
       <div class="my-1">Tên Sách: {{ detailReport.bookId.nameBook }}</div>
       <div>
         <span>Giá Gốc: đ{{ detailReport.bookId.price.toLocaleString('vi-VN') }}, </span>
         <span>Giá Khuyến Mãi: đ{{ detailReport.bookId.discountPrice.toLocaleString('vi-VN') }}</span>
       </div>
       <div class="my-1">Tên Sách: {{ detailReport.bookId.auth }}</div>
-      <div class="my-1">Bình luận: {{ detailReport.comment }}</div>
+      <div class="my-2">Bình luận: {{ detailReport.comment }}</div>
+
       <button
         (click)="deleteReview()"
-        class="px-4 py-2 bg-gray-100 border rounded"
+        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
       >
         Xóa bình luận đánh giá
       </button>
     </div>
   </div>
+</div>
+<div
+  *ngIf="isLoading"
+  class="text-center"
+>
+  <app-admin-spinner></app-admin-spinner>
 </div>

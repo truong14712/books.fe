@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DetailReportComponent implements OnInit {
   detailReport: any;
+  isLoading = true;
   constructor(
     private report: ReportService,
     private ActivatedRoute: ActivatedRoute,
@@ -21,6 +22,7 @@ export class DetailReportComponent implements OnInit {
       const id = String(paramMap.get('id'));
       this.report.getOneReport(id).subscribe(({ data }) => {
         this.detailReport = data;
+        this.isLoading = false;
       });
     });
   }
