@@ -1,0 +1,15 @@
+.form {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-field {
+  width: 800px;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  width: 200px;
+}

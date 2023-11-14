@@ -1,0 +1,375 @@
+<div class="container mx-auto w-[1080px] mb-4">
+  <h1 class="text-center">Cập Nhật Sách Khuyến Mãi</h1>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onSubmit()"
+    class="form"
+    novalidate
+  >
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Tên Sách</mat-label>
+      <input
+        matInput
+        formControlName="nameBook"
+        type="text"
+        placeholder="Enter your Name Book"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'nameBook')">
+        Tên Sách <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'nameBook')"> Tên Sách Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'nameBook')"> Tên Sách Không Được Chứa Khoảng Trắng </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Tác Giả</mat-label>
+      <input
+        matInput
+        formControlName="auth"
+        type="text"
+        placeholder="Enter your auth"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'auth')"> Tác Giả <strong>Không Được Để Trống</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'auth')"> Tác Giả Phải 6 Ký Tự Trở Lên </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'auth')"> Tác Giả Không Được Chứa Khoảng Trắng </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Giá Gốc</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        type="text"
+        placeholder="Enter your price"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'price')"> Giá Gốc <strong>Không Được Để Trống</strong> </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'price')"> Giá Gốc Không Được Chứa Khoảng Trắng </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Giá Khuyến Mại</mat-label>
+      <input
+        matInput
+        formControlName="discountPrice"
+        type="text"
+        placeholder="Enter your discountPrice"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'discountPrice')">
+        Giá Khuyến Mại <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('whitespace', 'discountPrice')">
+        Giá Khuyến Mại Không Được Chứa Khoảng Trắng
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Mô tả</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="myForm.hasError('required', 'description')">
+        Mô tả is <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Số Trang</mat-label>
+      <input
+        matInput
+        formControlName="pageNumber"
+        type="text"
+        placeholder="Enter your pageNumber"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'pageNumber')">
+        Số Trang <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Nhà Xuất Bản</mat-label>
+      <input
+        matInput
+        formControlName="publisher"
+        type="text"
+        placeholder="Enter your publisher"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'publisher')">
+        Nhà Xuất Bản <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'publisher')"> Nhà Xuất Bản Phải 6 Ký Tự Trở Lên </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Năm Xuất Bản</mat-label>
+      <input
+        matInput
+        formControlName="publicationYear"
+        type="text"
+        placeholder="Enter your publicationYear"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'publicationYear')">
+        Năm Xuất Bản <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Người Dịch</mat-label>
+      <input
+        matInput
+        formControlName="translator"
+        type="text"
+        placeholder="Enter your translator"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'translator')">
+        Người Dịch <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('minlength', 'translator')"> Người Dịch Phải 6 Ký Tự Trở Lên </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Trọng Lượng</mat-label>
+      <input
+        matInput
+        formControlName="weight"
+        type="text"
+        placeholder="Enter your weight"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'weight')">
+        Trọng Lượng <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Thương Hiệu</mat-label>
+      <input
+        matInput
+        formControlName="brand"
+        type="text"
+        placeholder="Enter your brand"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'brand')"
+        >Thương Hiệu<strong> Không Được Để Trống </strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label> Kho Hàng</mat-label>
+      <input
+        matInput
+        formControlName="stock"
+        type="text"
+        placeholder="Enter your stock"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'stock')">
+        Kho Hàng <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      class="form-field"
+    >
+      <mat-label>Kích Thước</mat-label>
+      <input
+        matInput
+        formControlName="size"
+        type="text"
+        placeholder="Enter your size"
+      />
+      <mat-error *ngIf="myForm.hasError('required', 'size')">
+        Kích Thước <strong>Không Được Để Trống</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Ngôn Ngữ</mat-label>
+      <mat-select
+        (selectionChange)="onLanguageSelection($event.value)"
+        formControlName="selectedLanguage"
+      >
+        <mat-option
+          *ngFor="let language of listLanguage"
+          [value]="language.name"
+        >
+          {{ language.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'selectedLanguage')"> Vui Lòng Chọn Ngôn Ngữ. </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Thể Loại</mat-label>
+      <mat-select
+        (selectionChange)="onCategorySelection($event.value)"
+        formControlName="selectedCategoryId"
+      >
+        <mat-option
+          *ngFor="let category of listCategory"
+          [value]="category._id"
+        >
+          {{ category.nameCategory }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'selectedCategoryId')"> Vui Lòng Chọn Thể Loại. </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Loại Bìa</mat-label>
+      <mat-select
+        (selectionChange)="onSelectionChange($event.value)"
+        formControlName="selectedCoverType"
+      >
+        <mat-option
+          *ngFor="let CoverType of listCoverType"
+          [value]="CoverType.name"
+        >
+          {{ CoverType.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'selectedCoverType')"> Vui Lòng Chọn Loại Bìa. </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Trạng Thái</mat-label>
+      <mat-select formControlName="status_Date">
+        <mat-option
+          *ngFor="let StatusEventType of listStatusEventType"
+          [value]="StatusEventType.value"
+        >
+          {{ StatusEventType.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="myForm.hasError('required', 'status_Date')"> Vui Lòng Chọn Trạng Thái. </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Ngày Bắt Đầu</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="start_Date"
+        placeholder="Ngày Bắt Đầu"
+      />
+      <mat-hint>Tháng/Ngày/Năm</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      >
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="myForm.hasError('required', 'start_Date')">
+        Ngày Tháng <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('pattern', 'start_Date')"> Định dạng ngày không hợp lệ </mat-error>
+      <mat-error *ngIf="myForm.get('start_Date')?.hasError('dateInPast')"> Vui lòng không nhập ngày đã qua </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="form-field"
+      color="accent"
+    >
+      <mat-label>Ngày Kết Thúc</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker2"
+        formControlName="finish_Date"
+        placeholder="Ngày Kết Thúc"
+      />
+      <mat-hint>Tháng/Ngày/Năm</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+        color="primary"
+      >
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="myForm.hasError('required', 'finish_Date')">
+        Ngày Tháng <strong>Không Được Để Trống</strong>
+      </mat-error>
+      <mat-error *ngIf="myForm.hasError('pattern', 'finish_Date')"> Định dạng ngày không hợp lệ </mat-error>
+      <mat-error *ngIf="myForm.get('finish_Date')?.hasError('invalidToDate')">
+        Ngày kết thúc phải lớn hơn ngày bắt đầu
+      </mat-error>
+      <mat-error *ngIf="myForm.get('finish_Date')?.hasError('dateInPast')"> Vui lòng không nhập ngày đã qua </mat-error>
+    </mat-form-field>
+
+    <label
+      class="w-[200px] flex items-center px-4 py-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer my-5 hover:bg-blue-500 hover:text-white"
+    >
+      <svg
+        class="w-8 h-8 mr-3"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+        />
+      </svg>
+      <span class="mt-2 text-base leading-normal">Ảnh</span>
+      <input
+        type="file"
+        class="hidden file-upload"
+        (change)="onFileSelected($event)"
+        multiple="true"
+      />
+    </label>
+    <div class="flex items-center justify-center">
+      <a routerLink="/admin/event">
+        <button
+          type="button"
+          class="py-2.5 px-5 text-sm text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 w-[200px] h-[36px]"
+        >
+          Trở về
+        </button>
+      </a>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="ml-4 submit-button"
+        [disabled]="!myForm.valid"
+      >
+        Đồng ý
+      </button>
+    </div>
+  </form>
+</div>
