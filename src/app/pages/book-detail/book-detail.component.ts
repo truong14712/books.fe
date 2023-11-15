@@ -51,6 +51,9 @@ export class BookDetailComponent implements OnInit {
     '__v',
     'isHighlighted',
     'ratings',
+    'status_Date',
+    'finish_Date',
+    'start_Date',
   ];
 
   keyMappings: { [key: string]: string } = {
