@@ -4,7 +4,7 @@ import { StatisticalService } from '@core/services/statistical/statistical.servi
 import { ChartOptions, ChartConfiguration } from 'chart.js';
 import { Router } from '@angular/router';
 import { validateToDate } from '../../../core/validation/validateToDate';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     responsive: false,
   };
   public barChartData!: ChartConfiguration<'bar'>['data'];
-
+  isLoading = true;
   myForm = this.FormBuilder.group({
     fromDate: [null, [Validators.required]],
     toDate: [null, [Validators.required, validateToDate]],
@@ -54,6 +54,7 @@ export class DashboardComponent implements OnInit {
       this.statusOrder = data.map((item: any) => {
         return item._id;
       });
+      this.isLoading = false;
     });
     statistical.countRatingInOrders().subscribe(({ data }) => {
       this.countRatting = [
@@ -64,6 +65,7 @@ export class DashboardComponent implements OnInit {
       this.ratting = data.map((item: any) => {
         return item._id + ' Sao ';
       });
+      this.isLoading = false;
     });
   }
 
@@ -72,6 +74,7 @@ export class DashboardComponent implements OnInit {
       this.calculateRevenueByAuthor = data;
       this.createBarChartData();
       this.createLineChartData();
+      this.isLoading = false;
     });
   }
   calculateTotalRevenue!: [];
@@ -122,8 +125,8 @@ export class DashboardComponent implements OnInit {
     if (this.myForm.valid) {
       this.router.navigate(['/admin/dashboard'], {
         queryParams: {
-          fromDate: this.myForm.value.fromDate,
-          toDate: this.myForm.value.toDate,
+          fromDate: moment(this.myForm.value.fromDate).format('MM-DD-YYYY'),
+          toDate: moment(this.myForm.value.toDate).format('MM-DD-YYYY'),
         },
       });
       this.statistical

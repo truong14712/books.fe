@@ -1,4 +1,7 @@
-<div class="container mx-auto w-[1440px] my-5">
+<div
+  class="container mx-auto w-[1440px] my-5"
+  *ngIf="!isLoading"
+>
   <div class="my-2">
     <h2 class="text-center uppercase">Tổng doanh thu</h2>
 
@@ -119,4 +122,10 @@
       </canvas>
     </div>
   </div> -->
+</div>
+<div
+  class="text-center"
+  *ngIf="isLoading"
+>
+  <app-admin-spinner></app-admin-spinner>
 </div>
