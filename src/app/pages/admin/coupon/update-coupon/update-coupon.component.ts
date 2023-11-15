@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Coupon } from '@core/interfaces/coupon';
 import { CouponService } from '@core/services/coupon/coupon.service';
+import { validateDateNotInPast } from '@core/validation/validateDateNotInPast';
 import * as moment from 'moment';
 
 @Component({
@@ -23,7 +24,7 @@ export class UpdateCouponComponent implements OnInit {
   myForm = this.FormBuilder.group({
     code: ['', [Validators.required]],
     discount: [0, [Validators.required, Validators.maxLength(3)]],
-    expirationDate: ['', [Validators.required]],
+    expirationDate: ['', [Validators.required, validateDateNotInPast]],
     description: ['', [Validators.required]],
     minAmount: [0, [Validators.required]],
     quantity: [0, [Validators.required]],

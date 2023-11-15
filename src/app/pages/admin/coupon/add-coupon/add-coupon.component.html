@@ -60,6 +60,7 @@
         Ngày Tháng <strong>Không Được Để Trống</strong>
       </mat-error>
       <mat-error *ngIf="myForm.hasError('pattern', 'expirationDate')"> Định dạng ngày không hợp lệ </mat-error>
+      <mat-error *ngIf="myForm.hasError('dateInPast', 'expirationDate')"> Vui lòng không nhập ngày đã qua </mat-error>
     </mat-form-field>
 
     <mat-form-field

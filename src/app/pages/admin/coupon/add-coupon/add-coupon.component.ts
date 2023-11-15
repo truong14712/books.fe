@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Coupon } from '@core/interfaces/coupon';
 import { CouponService } from '@core/services/coupon/coupon.service';
 import { noWhitespaceValidator } from '@core/validation/noWhitespaceValidator';
+import { validateDateNotInPast } from '@core/validation/validateDateNotInPast';
 
 @Component({
   selector: 'app-add-coupon',
@@ -23,7 +24,7 @@ export class AddCouponComponent implements OnInit {
   myForm = this.FormBuilder.group({
     code: ['', [Validators.required, noWhitespaceValidator]],
     discount: [0, [Validators.required, noWhitespaceValidator, Validators.maxLength(3)]],
-    expirationDate: ['', [Validators.required]],
+    expirationDate: ['', [Validators.required, validateDateNotInPast]],
     description: ['', [Validators.required]],
     minAmount: [0, [Validators.required, noWhitespaceValidator]],
     quantity: [0, [Validators.required, noWhitespaceValidator]],
