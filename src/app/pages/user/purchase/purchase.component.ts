@@ -117,7 +117,7 @@ export class PurchaseComponent implements OnInit {
   }
   handleRefundOrder(id: string) {
     const data = {
-      status: 'Đang xử lý tiền hoàn lại',
+      status: 'Đang xử lý hoàn tiền',
     };
     this.order.refundOrder(data, id).subscribe((data) => {
       this._snackBar.open(`${data.message}`, 'OK', {
