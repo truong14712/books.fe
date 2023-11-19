@@ -49,7 +49,11 @@ export class LoginComponent {
           const { user, accessToken } = data.data;
           this.auth.setUser(user);
           this.auth.setToken(accessToken);
-          this.router.navigate(['/']);
+          if (user.role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/']);
+          }
         },
         (err) => {
           this._snackBar.open(`${err.error.message}`, 'OK', {
